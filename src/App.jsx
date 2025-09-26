@@ -19,6 +19,7 @@ import Loading from "./Components/General/Loading.jsx";
 import Restricted from "./Components/General/Restricted.jsx";
 import Clients from "./Components/Clients/Clients.jsx";
 import ClientsAdd from "./Components/Clients/ClientsAdd.jsx";
+import Loans from "./Components/Loan/Loans.jsx";
 
 function App() {
     const [theme, colorMode] = useMode();
@@ -59,6 +60,7 @@ return (
                         <Route path="/clients/add" element={<PrivateRoute element={<ClientsAdd/>} rolesAllowed={["ADMIN","EMPLOYEE"]} />} />
                         <Route path="/dragon" element={<PrivateRoute element={<Dragon/>} rolesAllowed={["ADMIN"]} />} />
                         <Route path="/loanTool" element={<PrivateRoute element={<LoanTool/>} rolesAllowed={["ADMIN"]} />} />
+                        <Route path="/loans" element={<PrivateRoute element={<Loans />} rolesAllowed={["ADMIN","EMPLOYEE"]} />} />
                     </Routes>
                 </main>
             </div>

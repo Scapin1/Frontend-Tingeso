@@ -71,6 +71,7 @@ const ClientsAdd = () => {
                 }}
                 validationSchema={validationSchema}
                 onSubmit={values => {
+                    values.rut = formatRut(values.rut);
                     ClientService.addClient(values).then(() => {
                         navigate("/clients/");
                     });

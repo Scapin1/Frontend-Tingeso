@@ -1,51 +1,42 @@
-import {useTheme} from "@mui/material";
+import {Box, TextField, useTheme} from "@mui/material";
 import {tokens} from "../../theme.js";
 import {useNavigate} from "react-router-dom";
-import {useState} from "react";
-import {Box, TextField} from "@mui/material";
-import { useEffect } from "react";
+import {useEffect, useState} from "react";
+import LoanService from "../../services/loan.service.js";
 import CustomTable from "../Other/CustomTable.jsx";
-import ClientService from "../../services/client.service.js";
 
 
-const Clients = () => {
+const Loans = () => {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
     const navigate = useNavigate();
-    const [clients, setClients] = useState([]);
+    const [loans, setLoans] = useState([]);
     const [search, setSearch] = useState("");
 
     useEffect(() => {
         init();
     }, []);
 
-    const filteredClient = clients.filter((clients) =>
-        Object.values(clients)
-            .join(" ")
-            .toLowerCase()
-            .includes(search.toLowerCase())
-    );
-
     const init = () => {
-        ClientService
-            .getAll()
+        LoanService
+            .getAllLoans()
             .then((response) => {
-                setClients(response.data);
+                setLoans(response.data);
             })
             .catch((error) => {
-                console.error("There was an errorrr!", error);
+                console.error("There was an error!", error);
             });
     };
 
     const columns = [
         { field: "id", headerName: "ID", headerAlign: "center", align: "center" },
-        { field: "firstName", headerName: "Nombre", flex: 1, headerAlign: "center", align: "center" },
-        { field: "email", headerName: "Email", flex: 1, headerAlign: "center", align: "center" },
-        { field: "rut", headerName: "RUT", flex: 1, headerAlign: "center", align: "center" },
-        { field: "phoneNumber", headerName: "Teléfono", flex: 1, headerAlign: "center", align: "center", },
-        { field: "clientState", headerName: "Estado", flex: 1, headerAlign: "center", align: "center" },
-        { field: "debt", headerName: "Deuda", flex: 1, headerAlign: "center", align: "center" },
+        { field: "toolLoaned", headerName: "ID Herramienta", flex: 1, headerAlign: "center", align: "center" },
+        { field: "client", headerName: "ID Cliente", flex: 1, headerAlign: "center", align: "center" },
+        { field: "loanDate", headerName: "Fecha Préstamo", flex: 1, headerAlign: "center", align: "center" },
+        { field: "returnDate", headerName: "Fecha Devolución", flex: 1, headerAlign: "center", align: "center" },
+        { field: "status", headerName: "Estado", flex: 1, headerAlign: "center", align: "center" },
     ];
+
     return (
         <Box m="50px">
             <Box mb={2} display="flex" justifyContent="flex-end" gap={2}>
@@ -74,8 +65,8 @@ const Clients = () => {
                     </button>
                 </Box>
             </Box>
-            <CustomTable rows={filteredClient} columns={columns}/>
+            <CustomTable rows={loans} columns={columns}/>
         </Box>
     );
 }
-export default Clients;
+export default Loans;
