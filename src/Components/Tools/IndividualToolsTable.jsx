@@ -1,6 +1,6 @@
 import CustomTable from "../Other/CustomTable.jsx";
 import ToolStateChip from "./ToolStateChip.jsx";
-import DeactivateToolButton from "../Other/DeactivateToolButton.jsx";
+import DeactivateToolButton from "./DeactivateToolButton.jsx";
 import toolService from "../../services/tool.service.js";
 
 const IndividualToolsTable = ({ tools, onToolDeactivated }) => {

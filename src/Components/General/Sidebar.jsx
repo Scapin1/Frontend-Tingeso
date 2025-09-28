@@ -5,9 +5,7 @@ import { tokens } from "../../theme.js";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
 import ContactsOutlinedIcon from "@mui/icons-material/ContactsOutlined";
-import ReceiptOutlinedIcon from "@mui/icons-material/ReceiptOutlined";
-import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
-import CalendarTodayOutlinedIcon from "@mui/icons-material/CalendarTodayOutlined";
+import ChecklistRtlIcon from '@mui/icons-material/ChecklistRtl';
 import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
 import BarChartOutlinedIcon from "@mui/icons-material/BarChartOutlined";
 import PieChartOutlineOutlinedIcon from "@mui/icons-material/PieChartOutlineOutlined";
@@ -19,6 +17,7 @@ import CreditScoreIcon from '@mui/icons-material/CreditScore';
 import * as React from "react";
 import keycloak from "../../services/keycloak.js";
 import { useNavigate } from "react-router-dom";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 
 const Item = ({ title, to ,icon ,selected, setSelected }) => {
     const theme = useTheme();
@@ -183,9 +182,9 @@ const SidebarMenu = () => {
                     setSelected={setSelected}
                 />
                 <Item
-                    title="Calendar"
-                    to="/calendar"
-                    icon={<CalendarTodayOutlinedIcon />}
+                    title="Loans"
+                    to="/loans"
+                    icon={<ChecklistRtlIcon />}
                     selected={selected}
                     setSelected={setSelected}
                 />
