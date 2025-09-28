@@ -8,6 +8,12 @@ const addClient = (client) => {
     return httpClient.post('/api/clients/addClient', client);
 }
 
+const updateClient = (client) => {
+    return httpClient.put("/api/clients/updateClient", client);
+}
+
 export default {
-    getAll, addClient
+    getAll,
+    addClient,
+    updateClient
 }

@@ -3,47 +3,13 @@ import { Formik } from "formik";
 import * as yup from "yup";
 import ClientService from "../../services/client.service.js";
 import { useNavigate } from "react-router-dom";
+import formatPhoneNumber from "../Format/PhoneFormatter.js"
+import formatRut from "../Format/RutFormatter.js"
 
 const estados = [
     { value: "ACTIVE", label: "Activo" },
     { value: "RESTRICTED", label: "Restringido" },
 ];
-
-const formatRut = (value) => {
-    // Elimina todo lo que no sea dígito o 'k'/'K'
-    const clean = value.replace(/[^0-9kK]/g, "").toUpperCase();
-
-    if (clean.length === 0) return "";
-
-    const body = clean.slice(0, -1);
-    const dv = clean.slice(-1);
-
-    // Formatea el cuerpo con puntos cada 3 dígitos desde el final
-    const reversed = body.split("").reverse();
-    const withDots = [];
-
-    for (let i = 0; i < reversed.length; i++) {
-        if (i > 0 && i % 3 === 0) {
-            withDots.push(".");
-        }
-        withDots.push(reversed[i]);
-    }
-
-    const formattedBody = withDots.reverse().join("");
-
-    return `${formattedBody}-${dv}`;
-};
-
-
-const formatPhoneNumber = (value) => {
-    // Elimina todo lo que no sea dígito
-    const digits = value.replace(/\D/g, "");
-
-    // Aplica formato chileno: +56 9 XXXX XXXX
-    if (digits.length <= 7) return `+56 9 ${digits.slice(3, 7)}`;
-
-    return `+56 9 ${digits.slice(3, 7)} ${digits.slice(7, 11)}`;
-}
 
 const validationSchema = yup.object().shape({
     firstName: yup.string().required("Requerido"),

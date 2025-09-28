@@ -58,7 +58,7 @@ const ReturnLoanPopup = ({ open, onClose, onConfirm, damaged, setDamaged }) => {
                             checkedIcon={<CloseIcon sx={{ color: "#d32f2f" }} />}
                         />
                     }
-                    label="¿La herramienta está dañada?"
+                    label="La herramienta está dañada"
                 />
 
                 <Box display="flex" justifyContent="space-between" mt={2}>

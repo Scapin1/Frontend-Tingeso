@@ -27,13 +27,14 @@ const LoanTool = () => {
     const navigate = useNavigate();
 
     const handleFormSubmit = async (values) => {
-        console.log(values);
         await LoanService.addLoan({
             returnDate: values.returnDate,
             loanDate: dayjs().format("YYYY-MM-DD"),
             status: "NORMAL",
             toolLoaned: {name: values.tool.name},
             client: {id: values.client.id},
+        }).catch((err) => {
+            alert("Error registering loan: " + err.response.data.message);
         });
         navigate("/loans");
     };

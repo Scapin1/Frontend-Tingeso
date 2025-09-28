@@ -1,4 +1,4 @@
-import {useTheme} from "@mui/material";
+import {IconButton, Tooltip, useTheme} from "@mui/material";
 import {tokens} from "../../theme.js";
 import {useNavigate} from "react-router-dom";
 import {useState} from "react";
@@ -6,6 +6,9 @@ import {Box, TextField} from "@mui/material";
 import { useEffect } from "react";
 import CustomTable from "../Other/CustomTable.jsx";
 import ClientService from "../../services/client.service.js";
+import ClientStateChip from "./ClientStateChip.jsx";
+import EditIcon from '@mui/icons-material/Edit';
+import ClientEditDialog from "./ClientEditDialog.jsx";
 
 
 const Clients = () => {
@@ -14,7 +17,32 @@ const Clients = () => {
     const navigate = useNavigate();
     const [clients, setClients] = useState([]);
     const [search, setSearch] = useState("");
+    const [selectedClient, setSelectedClient] = useState(null);
+    const [openEdit, setOpenEdit] = useState(false);
 
+    const handleEditOpen = (client) => {
+        setSelectedClient(client);
+        setOpenEdit(true);
+    };
+
+    const handleEditClose = () => {
+        setOpenEdit(false);
+        setSelectedClient(null);
+    };
+
+    const handleClientChange = (updated) => {
+        setSelectedClient(updated);
+    };
+
+    const handleSave = async (client) => {
+        try {
+            await ClientService.updateClient(client);
+            setOpenEdit(false);
+            init(); // refresca la tabla
+        } catch (error) {
+            alert("Error al guardar: " + (error.response?.data?.message || error.message));
+        }
+    };
     useEffect(() => {
         init();
     }, []);
@@ -33,7 +61,7 @@ const Clients = () => {
                 setClients(response.data);
             })
             .catch((error) => {
-                console.error("There was an errorrr!", error);
+                alert("Error fetching clients: " + error.response.data.message);
             });
     };
 
@@ -43,8 +71,23 @@ const Clients = () => {
         { field: "email", headerName: "Email", flex: 1, headerAlign: "center", align: "center" },
         { field: "rut", headerName: "RUT", flex: 1, headerAlign: "center", align: "center" },
         { field: "phoneNumber", headerName: "Teléfono", flex: 1, headerAlign: "center", align: "center", },
-        { field: "clientState", headerName: "Estado", flex: 1, headerAlign: "center", align: "center" },
         { field: "debt", headerName: "Deuda", flex: 1, headerAlign: "center", align: "center" },
+        { field: "clientState", headerName: "Estado", flex: 1, headerAlign: "center", align: "center", renderCell: (params) => <ClientStateChip state={params.value} />, },
+        {
+            field: "actions",
+            headerName: "Acciones",
+            headerAlign: "center",
+            align: "center",
+            sortable: false,
+            renderCell: (params) => (
+                <Tooltip title="Editar">
+                    <IconButton onClick={() => handleEditOpen(params.row)}>
+                        <EditIcon />
+                    </IconButton>
+                </Tooltip>
+            ),
+        }
+
     ];
     return (
         <Box m="50px">
@@ -75,6 +118,14 @@ const Clients = () => {
                 </Box>
             </Box>
             <CustomTable rows={filteredClient} columns={columns}/>
+            <ClientEditDialog
+                open={openEdit && selectedClient !== null}
+                client={selectedClient || {}}
+                onChange={handleClientChange}
+                onClose={handleEditClose}
+                onSave={handleSave}
+            />
+
         </Box>
     );
 }
