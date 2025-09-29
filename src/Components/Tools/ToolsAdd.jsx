@@ -3,6 +3,7 @@ import { Formik } from "formik";
 import * as yup from "yup";
 import toolService from "../../services/tool.service.js";
 import {useNavigate} from "react-router-dom";
+import keycloak from "../../services/keycloak.js";
 
 function formatCLP(value) {
     if (!value) return "";
@@ -20,10 +21,9 @@ const ToolsAdd = () => {
             <Formik
                 initialValues={{
                     name: "",
-                    category: "",
-                    repoFee: 0,
-                    state: "AVAILABLE",
                     quantity: 0,
+                    repoFee: 0,
+                    category: "",
                 }}
                 validationSchema={yup.object().shape({
                     name: yup.string().required("Requerido"),
@@ -32,7 +32,6 @@ const ToolsAdd = () => {
                         .string()
                         .required("Requerido")
                         .test("is-valid", "Debe ser un número mayor a 0", val => !!val && Number(val.replace(/\D/g, "")) > 0),
-                    state: yup.string().required("Requerido"),
                     quantity: yup
                         .number()
                         .required("Requerido")
@@ -40,7 +39,7 @@ const ToolsAdd = () => {
                 })}
                 onSubmit={values => {
                     values.repoFee = Number(values.repoFee.replace(/\D/g, ""));
-                    toolService.add(values).then(() =>{
+                    toolService.add(values, keycloak.tokenParsed.preferred_username).then(() =>{
                             navigate("/tools");
                         }
                     )

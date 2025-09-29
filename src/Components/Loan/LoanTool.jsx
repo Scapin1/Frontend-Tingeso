@@ -9,6 +9,7 @@ import ToolSelector from "./ToolSelector.jsx";
 import ClientSelector from "./ClientSelector.jsx";
 import LoanService from "../../services/loan.service.js";
 import { useNavigate } from "react-router-dom";
+import keycloak from "../../services/keycloak.js";
 
 const validationSchema = yup.object().shape({
     tool: yup.object().required("Herramienta requerida"),
@@ -33,7 +34,7 @@ const LoanTool = () => {
             status: "NORMAL",
             toolLoaned: {name: values.tool.name},
             client: {id: values.client.id},
-        }).catch((err) => {
+        }, keycloak.tokenParsed.preferred_username).catch((err) => {
             alert("Error registering loan: " + err.response.data.message);
         });
         navigate("/loans");

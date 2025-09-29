@@ -7,6 +7,7 @@ import ToolService from "../../services/tool.service.js";
 import EditIcon from "@mui/icons-material/Edit";
 import {IconButton, Tooltip, Box} from "@mui/material";
 import ToolChangeFeeDialog from "./ToolChangeFeeDialog.jsx";
+import keycloak from "../../services/keycloak.js";
 
 const IndividualToolsTable = ({ tools, onToolDeactivated }) => {
 
@@ -66,7 +67,7 @@ const IndividualToolsTable = ({ tools, onToolDeactivated }) => {
                     <DeactivateToolButton
                         onDeactivate={() => {
                             if(confirm(`sure you want to deactivate tool with ID: ${params.row.id}?`))
-                                toolService.writeOff(params.row.id).then(() => {
+                                toolService.writeOff(params.row.id,keycloak.tokenParsed.preferred_username).then(() => {
                                 onToolDeactivated();
                             })
                                 .catch((err) => {

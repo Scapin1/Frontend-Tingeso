@@ -8,16 +8,8 @@ const getAll = () => {
     return httpClient.get('/api/tools/getAll');
 }
 
-const add = data => {
-    return httpClient.post('/api/tools/addTool', null, {
-        params: {
-            quantity: data.quantity,
-            name: data.name,
-            category: data.category,
-            repoFee: data.repoFee,
-            state: data.state,
-        }
-    });
+const add = (tool ,username) => {
+    return httpClient.post( `/api/tools/addTool/${username}`, tool)
 }
 
 const getFees = id => {
@@ -28,12 +20,8 @@ const updateFee = fees => {
     return httpClient.put('/api/tools/changeFee', fees)
 }
 
-const writeOff = id => {
-    return httpClient.put('/api/tools/writeOff',null,{
-        params: {
-            toolId: id
-        }
-    });
+const writeOff = (id,username) => {
+    return httpClient.put(`/api/tools/writeOff/${id}/${username}`);
 }
 
 export default  {

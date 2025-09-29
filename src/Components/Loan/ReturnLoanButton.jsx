@@ -3,6 +3,7 @@ import AssignmentReturnIcon from "@mui/icons-material/AssignmentReturn";
 import { useState } from "react";
 import loanService from "../../services/loan.service.js";
 import ReturnLoanPopup from "./ReturnLoanPopup.jsx";
+import keycloak from "../../services/keycloak.js";
 
 const ReturnLoanButton = ({ loanId, status, onReturned }) => {
     const disabled = status === "FINISHED" || status === "IN_REPAIR";
@@ -10,7 +11,7 @@ const ReturnLoanButton = ({ loanId, status, onReturned }) => {
     const [damaged, setDamaged] = useState(false);
 
     const handleConfirm = () => {
-        loanService.returnLoan(loanId, damaged)
+        loanService.returnLoan(loanId, damaged, keycloak.tokenParsed.preferred_username)
             .then(() => {
                 if (typeof onReturned === "function") {
                     onReturned(); // refresca la vista desde el componente padre

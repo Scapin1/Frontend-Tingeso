@@ -4,12 +4,12 @@ const getAllLoans = () => {
     return httpClient.get('/api/loans/getAll');
 }
 
-const addLoan = loan => {
-    return httpClient.post('/api/loans/addLoan', loan);
+const addLoan = (loan, username) => {
+    return httpClient.post(`/api/loans/addLoan/${username}`, loan);
 }
 
-const returnLoan = (loanId, damaged) => {
-    return httpClient.put(`/api/loans/returnLoan/${loanId}/${damaged}`);
+const returnLoan = (loanId, damaged, username) => {
+    return httpClient.put(`/api/loans/returnLoan/${loanId}/${damaged}/${username}`);
 
 }
 export default {
