@@ -93,7 +93,7 @@ const Clients = () => {
         <Box m="50px">
             <Box mb={2} display="flex" justifyContent="flex-end" gap={2}>
                 <TextField
-                    label="Search"
+                    label="Buscar"
                     variant="outlined"
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
@@ -113,7 +113,7 @@ const Clients = () => {
                         }}
                         onClick={() => {navigate('/clients/add')}}
                     >
-                        New Client
+                        Nuevo Cliente
                     </button>
                 </Box>
             </Box>

@@ -20,6 +20,14 @@ const add = data => {
     });
 }
 
+const getFees = id => {
+    return httpClient.get(`/api/tools/getFees/${id}`);
+}
+
+const updateFee = fees => {
+    return httpClient.put('/api/tools/changeFee', fees)
+}
+
 const writeOff = id => {
     return httpClient.put('/api/tools/writeOff',null,{
         params: {
@@ -29,5 +37,10 @@ const writeOff = id => {
 }
 
 export default  {
-    getAllList, add, getAll, writeOff
+    getAllList,
+    add,
+    getAll,
+    writeOff,
+    getFees,
+    updateFee
 };

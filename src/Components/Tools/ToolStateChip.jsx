@@ -7,22 +7,22 @@ import TimelapseIcon from '@mui/icons-material/Timelapse';
 
 const stateConfig = {
     AVAILABLE: {
-        label: "AVAILABLE",
+        label: "Disponible",
         icon: <CheckCircleIcon sx={{ color: "#fff" }} />,
         sx: { backgroundColor: "#43a047", color: "#fff", fontWeight: 600 },
     },
     WRITTEN_OFF: {
-        label: "WRITTEN_OFF",
+        label: "De Baja",
         icon: <CancelIcon sx={{ color: "#fff" }} />,
         sx: { backgroundColor: "#e53935", color: "#fff", fontWeight: 600 },
     },
     IN_REPAIR: {
-        label: "IN_REPAIR",
+        label: "En Reparación",
         icon: <BuildIcon sx={{ color: "#fff" }} />,
         sx: { backgroundColor: "#fbc02d", color: "#fff", fontWeight: 600 },
     },
     LOANED: {
-        label: "LOANED",
+        label: "Prestado",
         icon: <TimelapseIcon sx={{color: "#fff"}}/>,
         sx: {backgroundColor: "#1e88e5", color: "#fff",}
     },

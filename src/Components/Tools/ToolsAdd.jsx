@@ -4,12 +4,6 @@ import * as yup from "yup";
 import toolService from "../../services/tool.service.js";
 import {useNavigate} from "react-router-dom";
 
-const estados = [
-    { value: "AVAILABLE", label: "Disponible" },
-    { value: "LOANED", label: "En uso" },
-    { value: "IN_REPAIR", label: "En reparación" },
-];
-
 function formatCLP(value) {
     if (!value) return "";
     // Elimina todo lo que no sea número
@@ -28,7 +22,7 @@ const ToolsAdd = () => {
                     name: "",
                     category: "",
                     repoFee: 0,
-                    state: "",
+                    state: "AVAILABLE",
                     quantity: 0,
                 }}
                 validationSchema={yup.object().shape({
@@ -66,7 +60,7 @@ const ToolsAdd = () => {
                                 fullWidth
                                 variant="filled"
                                 type="text"
-                                label="Tool Name"
+                                label="Nombre herramienta"
                                 onBlur={handleBlur}
                                 onChange={handleChange}
                                 value={values.name}
@@ -79,7 +73,7 @@ const ToolsAdd = () => {
                                 fullWidth
                                 variant="filled"
                                 type="text"
-                                label="Category"
+                                label="Categoría"
                                 onBlur={handleBlur}
                                 onChange={handleChange}
                                 value={values.category}
@@ -92,7 +86,7 @@ const ToolsAdd = () => {
                                 fullWidth
                                 variant="filled"
                                 type="text"
-                                label="Repo Fee"
+                                label="Costo de reposición"
                                 onBlur={handleBlur}
                                 onChange={e => {
                                     const formatted = formatCLP(e.target.value);
@@ -111,35 +105,11 @@ const ToolsAdd = () => {
                                 inputMode="numeric"
                                 pattern="[0-9]*"
                             />
-                            <FormControl
-                                fullWidth
-                                variant="filled"
-                                sx={{ gridColumn: "span 2" }}
-                                error={touched.state && errors.state}
-                            >
-                                <InputLabel id="estado-label">Estado</InputLabel>
-                                <Select
-                                    labelId="estado-label"
-                                    id="estado"
-                                    value={values.state}
-                                    name="state"
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    label="Estado"
-                                    variant="filled"
-                                >
-                                    {estados.map(option => (
-                                        <MenuItem key={option.value} value={option.value}>
-                                            {option.label}
-                                        </MenuItem>
-                                    ))}
-                                </Select>
-                            </FormControl>
                             <TextField
                                 fullWidth
                                 variant="filled"
                                 type="number"
-                                label="Stock"
+                                label="Cantidad"
                                 onBlur={handleBlur}
                                 onChange={handleChange}
                                 value={values.quantity}

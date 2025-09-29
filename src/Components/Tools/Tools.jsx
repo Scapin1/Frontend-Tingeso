@@ -47,7 +47,7 @@ const Tools = () => {
         <Box m="50px">
             <Box mb={2} display="flex" justifyContent="flex-end" gap={2}>
                 <TextField
-                    label="Search"
+                    label="Buscar"
                     variant="outlined"
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
@@ -69,7 +69,7 @@ const Tools = () => {
                             }}
                             onClick={() => {navigate('/tools/add')}}
                         >
-                            New Tool
+                            Nueva Herramienta
                         </button>
                     </Box>
                 )}

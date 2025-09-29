@@ -4,7 +4,6 @@ import {Route, Routes} from 'react-router-dom'
 import {useMode} from "./theme.js";
 import {CssBaseline, ThemeProvider} from "@mui/material";
 import {ColorModeContext} from "./theme.js";
-import Employees from "./Components/Employees.jsx";
 import Tools from "./Components/Tools/Tools.jsx";
 import {useKeycloak} from "@react-keycloak/web";
 import SidebarMenu from "./Components/General/Sidebar.jsx";
@@ -52,7 +51,6 @@ return (
                     <Routes>
                         <Route path="/" element={<Home />} />
                         <Route path="/home" element={<PrivateRoute element={<Home />} rolesAllowed={["ADMIN","EMPLOYEE"]} />} />
-                        <Route path="/employees" element={<PrivateRoute element={<Employees />} rolesAllowed={["ADMIN"]} />} />
                         <Route path="/tools" element={<PrivateRoute element={<Tools />} rolesAllowed={["ADMIN","EMPLOYEE"]} />} />
                         <Route path="/tools/add" element={<PrivateRoute element={<ToolsAdd />} rolesAllowed={["ADMIN"]} />} />
                         <Route path="/loanTool" element={<PrivateRoute element={<LocalizationProvider dateAdapter={AdapterDayjs}> <LoanTool /> </LocalizationProvider>} rolesAllowed={["ADMIN","EMPLOYEE"]} />} />

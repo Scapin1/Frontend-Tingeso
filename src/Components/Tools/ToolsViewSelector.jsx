@@ -7,8 +7,8 @@ const ToolViewSelector = ({ viewMode, setViewMode }) => (
         onChange={(_, value) => value && setViewMode(value)}
         size="small"
     >
-        <ToggleButton value="grouped">Grouped</ToggleButton>
-        <ToggleButton value="individual">Individual</ToggleButton>
+        <ToggleButton value="grouped">Agrupado</ToggleButton>
+        <ToggleButton value="individual">Todas</ToggleButton>
     </ToggleButtonGroup>
 );
 

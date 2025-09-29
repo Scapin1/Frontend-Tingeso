@@ -80,9 +80,9 @@ const LoanTool = () => {
                             <DatePicker
                                 label="Fecha de devolución estimada"
                                 value={values.returnDate ? dayjs(values.returnDate) : null}
-                                minDate={dayjs()}
+                                minDate={dayjs().add(1, 'day')}
                                 views={['year', 'month', 'day']}
-                                format={"DD/MM/YYYY"}
+                                format={"YYYY-MM-DD"}
                                 onChange={date => {
                                     setFieldValue("returnDate", date.format("YYYY-MM-DD"));
                                 }}

@@ -29,26 +29,29 @@ const Home = () => {
                 gutterBottom
                 sx={{ color: colors.greenAccent[500] }}
             >
-                ToolRent: Tu solución para la gestión de arriendo de herramientas
+                ToolRent · Panel Interno de Gestión
             </Typography>
+
             <Typography variant="body1" sx={{ color: colors.grey[100] }}>
-                Bienvenido a ToolRent, la plataforma integral que automatiza y optimiza el arriendo de herramientas para construcción, reparaciones y proyectos domésticos. Nuestra solución digital te permite gestionar solicitudes, entregas y devoluciones de manera eficiente y transparente.
+                Bienvenido al sistema interno de ToolRent. Esta plataforma está diseñada exclusivamente para empleados autorizados, facilitando la administración eficiente del ciclo completo de arriendo de herramientas: desde la solicitud hasta la devolución.
             </Typography>
+
             <Typography
                 variant="h6"
                 gutterBottom
                 sx={{ mt: 3, color: colors.greenAccent[400] }}
             >
-                ¿Qué te ofrece ToolRent?
+                Funcionalidades clave
             </Typography>
+
             <List>
                 {[
-                    "Gestión digital de inventario en tiempo real.",
-                    "Automatización de solicitudes, entregas y devoluciones.",
-                    "Aplicación automática de reglas de negocio y multas.",
-                    "Reportes estratégicos para la toma de decisiones.",
-                    "Control y trazabilidad del estado de cada herramienta.",
-                    "Mejora la experiencia de tus clientes y la eficiencia operativa.",
+                    "Visualización y control del inventario en tiempo real.",
+                    "Gestión de solicitudes, entregas y devoluciones con trazabilidad completa.",
+                    "Aplicación automática de reglas operativas, multas y bloqueos.",
+                    "Reportes operativos y estratégicos para supervisores y gerencia.",
+                    "Historial detallado por herramienta, cliente y operación.",
+                    "Validaciones integradas para evitar errores y duplicaciones.",
                 ].map((text, idx) => (
                     <ListItem key={idx}>
                         <ListItemIcon>
@@ -61,8 +64,9 @@ const Home = () => {
                     </ListItem>
                 ))}
             </List>
+
             <Typography variant="body1" sx={{ mt: 2, color: colors.grey[100] }}>
-                Con ToolRent, tu negocio estará preparado para crecer, reducir pérdidas y ofrecer un servicio confiable y competitivo.
+                Recuerda que todas las acciones quedan registradas. Usa este sistema de forma responsable y conforme a los protocolos internos. Para soporte técnico o dudas operativas, contacta al área de sistemas.
             </Typography>
         </Container>
     );

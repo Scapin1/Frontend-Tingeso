@@ -2,7 +2,7 @@ import { IconButton, Tooltip } from "@mui/material";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 
 const DeactivateToolButton = ({ onDeactivate, disabled }) => (
-    <Tooltip title="Write Off Tool">
+    <Tooltip title="Dar de baja">
     <span>
         <IconButton
             color="error"

@@ -14,9 +14,9 @@ const groupTools = (tools) => {
 };
 
 const columns = [
-    { field: "name", headerName: "Name", flex: 1, headerAlign: "center", align: "center" },
-    { field: "category", headerName: "Category", flex: 1, headerAlign: "center", align: "center" },
-    { field: "stock", headerName: "Quantity", flex: 1, headerAlign: "center", align: "center" },
+    { field: "name", headerName: "Nombre", flex: 1, headerAlign: "center", align: "center" },
+    { field: "category", headerName: "Categoría", flex: 1, headerAlign: "center", align: "center" },
+    { field: "stock", headerName: "Cantidad", flex: 1, headerAlign: "center", align: "center" },
 ];
 
 const GroupedToolsTable = ({ tools }) => {

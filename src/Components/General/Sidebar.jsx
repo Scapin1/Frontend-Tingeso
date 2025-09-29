@@ -131,7 +131,7 @@ const SidebarMenu = () => {
 
             <Box paddingLeft={isCollapsed ? undefined : "10%"}>
                 <Item
-                    title="Home"
+                    title="Inicio"
                     to="/home"
                     icon={<HomeOutlinedIcon />}
                     selected={selected}
@@ -143,24 +143,17 @@ const SidebarMenu = () => {
                     color={colors.grey[300]}
                     sx={{ m: "15px 0 5px 20px" }}
                 >
-                    Data
+                    Información
                 </Typography>
                 <Item
-                    title="Manage Team"
-                    to="/employees"
-                    icon={<PeopleOutlinedIcon />}
-                    selected={selected}
-                    setSelected={setSelected}
-                />
-                <Item
-                    title="Contacts Information"
+                    title="Información Clientes"
                     to="/clients"
                     icon={<ContactsOutlinedIcon />}
                     selected={selected}
                     setSelected={setSelected}
                 />
                 <Item
-                    title="Tools"
+                    title="Herramientas"
                     to="/tools"
                     icon={<HandymanIcon />}
                     selected={selected}
@@ -172,36 +165,28 @@ const SidebarMenu = () => {
                     color={colors.grey[300]}
                     sx={{ m: "15px 0 5px 20px" }}
                 >
-                    Pages
+                    Prestamos
                 </Typography>
                 <Item
-                    title="Add Loan"
+                    title="Nuevo Préstamo"
                     to="/loanTool"
                     icon={<CreditScoreIcon />}
                     selected={selected}
                     setSelected={setSelected}
                 />
                 <Item
-                    title="Loans"
+                    title="Prestamos Activos"
                     to="/loans"
                     icon={<ChecklistRtlIcon />}
                     selected={selected}
                     setSelected={setSelected}
                 />
-                <Item
-                    title="FAQ Page"
-                    to="/faq"
-                    icon={<HelpOutlineOutlinedIcon />}
-                    selected={selected}
-                    setSelected={setSelected}
-                />
-
                 <Typography
                     variant="h6"
                     color={colors.grey[300]}
                     sx={{ m: "15px 0 5px 20px" }}
                 >
-                    Charts
+                    Reportes y Estadísticas
                 </Typography>
                 <Item
                     title="Bar Chart"
