@@ -1,6 +1,4 @@
-import {Box, TextField, useTheme} from "@mui/material";
-import {tokens} from "../../theme.js";
-import {useNavigate} from "react-router-dom";
+import {Box} from "@mui/material";
 import {useEffect, useState} from "react";
 import LoanService from "../../services/loan.service.js";
 import CustomTable from "../Other/CustomTable.jsx";
@@ -9,10 +7,7 @@ import ReturnLoanButton from "./ReturnLoanButton.jsx";
 
 
 const Loans = () => {
-    const theme = useTheme();
-    const colors = tokens(theme.palette.mode);
     const [loans, setLoans] = useState([]);
-    const [search, setSearch] = useState("");
 
     useEffect(() => {
         init();

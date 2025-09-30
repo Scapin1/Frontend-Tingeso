@@ -19,6 +19,7 @@ import Restricted from "./Components/General/Restricted.jsx";
 import Clients from "./Components/Clients/Clients.jsx";
 import ClientsAdd from "./Components/Clients/ClientsAdd.jsx";
 import Loans from "./Components/Loan/Loans.jsx";
+import Kardex from "./Components/Kardex/Kardex.jsx";
 
 function App() {
     const [theme, colorMode] = useMode();
@@ -59,6 +60,7 @@ return (
                         <Route path="/dragon" element={<PrivateRoute element={<Dragon/>} rolesAllowed={["ADMIN"]} />} />
                         <Route path="/loanTool" element={<PrivateRoute element={<LoanTool/>} rolesAllowed={["ADMIN"]} />} />
                         <Route path="/loans" element={<PrivateRoute element={<Loans />} rolesAllowed={["ADMIN","EMPLOYEE"]} />} />
+                        <Route path="/kardex" element={<PrivateRoute element={<Kardex />} rolesAllowed={["ADMIN","EMPLOYEE"]} />} />
                     </Routes>
                 </main>
             </div>
