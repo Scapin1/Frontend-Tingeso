@@ -15,6 +15,7 @@ import CreditScoreIcon from '@mui/icons-material/CreditScore';
 import * as React from "react";
 import keycloak from "../../services/keycloak.js";
 import { useNavigate } from "react-router-dom";
+import {Inventory2Outlined} from "@mui/icons-material";
 
 const Item = ({ title, to ,icon ,selected, setSelected }) => {
     const theme = useTheme();

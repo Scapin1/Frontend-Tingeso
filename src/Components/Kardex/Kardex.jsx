@@ -4,6 +4,7 @@ import {Box} from "@mui/material";
 import CustomTable from "../Other/CustomTable.jsx";
 import KardexStateChip from "./KardexStateChip.jsx";
 import dayjs from "dayjs";
+import KardexFilter from "./KardexFilter.jsx";
 
 const Kardex = () => {
     const [kardex, setKardex] = useState([]);
@@ -23,6 +24,15 @@ const Kardex = () => {
             });
     };
 
+    const handleFilter = async ({ startDate, endDate, toolId }) => {
+        try {
+            const response = await KardexService.getFilteredKardex(startDate, endDate, toolId);
+            setKardex(response.data);
+        } catch (error) {
+            console.error("Error al filtrar kardex", error);
+        }
+    };
+
     const columns = [
         { field: "id", headerName: "ID", headerAlign: "center", align: "center" },
         { field: "toolId", headerName: "Id Herramienta", flex: 1, headerAlign: "center", align: "center" },
@@ -34,6 +44,7 @@ const Kardex = () => {
 
     return (
         <Box m="50px">
+            <KardexFilter onFilter={handleFilter} />
             <CustomTable rows={kardex} columns={columns}/>
         </Box>
     );
