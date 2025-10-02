@@ -3,6 +3,7 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import BuildIcon from "@mui/icons-material/Build";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 import RemoveDoneIcon from '@mui/icons-material/RemoveDone';
+import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 
 const stateConfig = {
     NORMAL: {
@@ -19,6 +20,11 @@ const stateConfig = {
         label: "FINISHED",
         icon: <RemoveDoneIcon sx={{color: "#fff"}}/>,
         sx: {backgroundColor: "#1e88e5", color: "#fff",}
+    },
+    OVERDUE: {
+        label: "OVERDUE",
+        icon: <ErrorOutlineIcon sx={{ color: "#fff" }} />,
+        sx: { backgroundColor: "#e53935", color: "#fff", fontWeight: 600 },
     },
 };
 

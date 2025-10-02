@@ -3,11 +3,9 @@ import { Sidebar, Menu, MenuItem, sidebarClasses } from 'react-pro-sidebar';
 import { Box, IconButton, Typography, useTheme } from "@mui/material";
 import { tokens } from "../../theme.js";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
-import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
+import Inventory2OutlinedIcon from "@mui/icons-material/Inventory2Outlined";
 import ContactsOutlinedIcon from "@mui/icons-material/ContactsOutlined";
 import ChecklistRtlIcon from '@mui/icons-material/ChecklistRtl';
-import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
-import BarChartOutlinedIcon from "@mui/icons-material/BarChartOutlined";
 import PieChartOutlineOutlinedIcon from "@mui/icons-material/PieChartOutlineOutlined";
 import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
@@ -17,7 +15,6 @@ import CreditScoreIcon from '@mui/icons-material/CreditScore';
 import * as React from "react";
 import keycloak from "../../services/keycloak.js";
 import { useNavigate } from "react-router-dom";
-import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 
 const Item = ({ title, to ,icon ,selected, setSelected }) => {
     const theme = useTheme();
@@ -189,9 +186,9 @@ const SidebarMenu = () => {
                     Reportes y Estadísticas
                 </Typography>
                 <Item
-                    title="Bar Chart"
-                    to="/bar"
-                    icon={<BarChartOutlinedIcon />}
+                    title="kardex"
+                    to="/kardex"
+                    icon={<Inventory2OutlinedIcon />}
                     selected={selected}
                     setSelected={setSelected}
                 />

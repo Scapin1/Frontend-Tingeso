@@ -20,7 +20,7 @@ const stateConfig = {
     RETURN: {
         label: "Devolución",
         icon: <ReplayIcon sx={{ color: "#fff" }} />,
-        sx: { backgroundColor: "#f9a825", color: "#fff", fontWeight: 600 },
+        sx: { backgroundColor: "#8e24aa", color: "#fff", fontWeight: 600 }, // swapped with REPAIR
     },
     WRITE_OFF: {
         label: "De baja",
@@ -30,7 +30,7 @@ const stateConfig = {
     REPAIR: {
         label: "Reparación",
         icon: <BuildIcon sx={{ color: "#fff" }} />,
-        sx: { backgroundColor: "#8e24aa", color: "#fff", fontWeight: 600 },
+        sx: { backgroundColor: "#f9a825", color: "#fff", fontWeight: 600 }, // swapped with RETURN
     },
 };
 

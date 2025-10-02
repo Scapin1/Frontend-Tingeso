@@ -3,9 +3,9 @@ import KardexService from "../../services/kardex.service.js";
 import {Box} from "@mui/material";
 import CustomTable from "../Other/CustomTable.jsx";
 import KardexStateChip from "./KardexStateChip.jsx";
+import dayjs from "dayjs";
 
-
-const kardex = () => {
+const Kardex = () => {
     const [kardex, setKardex] = useState([]);
 
     useEffect(() => {
@@ -28,7 +28,7 @@ const kardex = () => {
         { field: "toolId", headerName: "Id Herramienta", flex: 1, headerAlign: "center", align: "center" },
         { field: "user", headerName: "Usuario", flex: 1, headerAlign: "center", align: "center" },
         { field: "quantity", headerName: "Cantidad afectada", flex: 1, headerAlign: "center", align: "center" },
-        { field: "movementDate", headerName: "Fecha del movimiento", flex: 1, headerAlign: "center", align: "center" },
+        { field: "movementDate", headerName: "Fecha del movimiento", flex: 1, headerAlign: "center", align: "center", renderCell: (params) => dayjs(params.value).format("DD/MM/YYYY HH:mm") },
         { field: "type", headerName: "Tipo de movimiento", flex: 1, headerAlign: "center", align: "center", renderCell: (params) => <KardexStateChip state={params.value} />,}
     ];
 
@@ -40,4 +40,4 @@ const kardex = () => {
 
 }
 
-export default kardex;
+export default Kardex;
