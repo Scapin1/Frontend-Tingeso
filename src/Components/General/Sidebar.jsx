@@ -50,13 +50,16 @@ const SidebarMenu = () => {
     }, [location, keycloak.authenticated]);
 
     return (
-        <Box>
+        <Box sx={{ height: '100vh', display: 'flex', flexDirection: 'column' }}>
             <Sidebar collapsed={isCollapsed}
                 rootStyles={{
                     [`.${sidebarClasses.container}`]: {
                         backgroundColor: colors.primary[400],
                         backgroundImage: "none",
                         boxShadow: "none",
+                        height: '100vh', // Ensure sidebar fills the viewport
+                        display: 'flex',
+                        flexDirection: 'column',
                     },
                 }}
             >
@@ -194,8 +197,8 @@ const SidebarMenu = () => {
                     setSelected={setSelected}
                 />
                 <Item
-                    title="Pie Chart"
-                    to="/pie"
+                    title="Reporte"
+                    to="/data"
                     icon={<PieChartOutlineOutlinedIcon />}
                     selected={selected}
                     setSelected={setSelected}

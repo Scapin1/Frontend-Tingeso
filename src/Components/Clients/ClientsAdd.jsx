@@ -6,11 +6,6 @@ import { useNavigate } from "react-router-dom";
 import formatPhoneNumber from "../Format/PhoneFormatter.js"
 import formatRut from "../Format/RutFormatter.js"
 
-const estados = [
-    { value: "ACTIVE", label: "Activo" },
-    { value: "RESTRICTED", label: "Restringido" },
-];
-
 const validationSchema = yup.object().shape({
     firstName: yup.string().required("Requerido"),
     email: yup.string().email("Email inválido").required("Requerido"),
@@ -19,7 +14,6 @@ const validationSchema = yup.object().shape({
         .string()
         .matches(/^\+56 9 \d{4} \d{4}$/, "Teléfono inválido")
         .required("Requerido"),
-    clientState: yup.string().required("Requerido"),
 });
 
 const ClientsAdd = () => {
@@ -33,7 +27,7 @@ const ClientsAdd = () => {
                     email: "",
                     rut: "",
                     phoneNumber: "",
-                    clientState: "",
+                    clientState: "ACTIVE",
                 }}
                 validationSchema={validationSchema}
                 onSubmit={values => {
@@ -114,31 +108,6 @@ const ClientsAdd = () => {
                                 sx={{ gridColumn: "span 2" }}
                                 inputMode="tel"
                             />
-
-                            <FormControl
-                                fullWidth
-                                variant="filled"
-                                sx={{ gridColumn: "span 2" }}
-                                error={!!touched.clientState && !!errors.clientState}
-                            >
-                                <InputLabel id="estado-label">Estado</InputLabel>
-                                <Select
-                                    labelId="estado-label"
-                                    id="estado"
-                                    value={values.clientState}
-                                    name="clientState"
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    label="Estado"
-                                    variant="filled"
-                                >
-                                    {estados.map(option => (
-                                        <MenuItem key={option.value} value={option.value}>
-                                            {option.label}
-                                        </MenuItem>
-                                    ))}
-                                </Select>
-                            </FormControl>
                         </Box>
                         <Box display="flex" justifyContent="end" mt="20px">
                             <Button type="submit" color="secondary" variant="contained" >

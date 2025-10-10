@@ -12,8 +12,13 @@ const returnLoan = (loanId, damaged, username) => {
     return httpClient.put(`/api/loans/returnLoan/${loanId}/${damaged}/${username}`);
 
 }
+
+const getTopClients = () => {
+    return httpClient.get('/api/loans/clientWithMostLoans');
+}
 export default {
     getAllLoans,
     addLoan,
-    returnLoan
+    returnLoan,
+    getTopClients
 }

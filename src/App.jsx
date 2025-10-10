@@ -20,6 +20,7 @@ import Clients from "./Components/Clients/Clients.jsx";
 import ClientsAdd from "./Components/Clients/ClientsAdd.jsx";
 import Loans from "./Components/Loan/Loans.jsx";
 import Kardex from "./Components/Kardex/Kardex.jsx";
+import ToolLoansDashboard from "./Components/Data/ToolLoansDashboard.jsx";
 
 function App() {
     const [theme, colorMode] = useMode();
@@ -61,6 +62,7 @@ return (
                         <Route path="/loanTool" element={<PrivateRoute element={<LoanTool/>} rolesAllowed={["ADMIN"]} />} />
                         <Route path="/loans" element={<PrivateRoute element={<Loans />} rolesAllowed={["ADMIN","EMPLOYEE"]} />} />
                         <Route path="/kardex" element={<PrivateRoute element={<Kardex />} rolesAllowed={["ADMIN","EMPLOYEE"]} />} />
+                        <Route path="/data" element={<PrivateRoute element={<ToolLoansDashboard />} rolesAllowed={["ADMIN","EMPLOYEE"]} />} />
                     </Routes>
                 </main>
             </div>

@@ -28,16 +28,18 @@ const LoanTool = () => {
     const navigate = useNavigate();
 
     const handleFormSubmit = async (values) => {
-        await LoanService.addLoan({
-            returnDate: values.returnDate,
-            loanDate: dayjs().format("YYYY-MM-DD"),
-            status: "NORMAL",
-            toolLoaned: {name: values.tool.name},
-            client: {id: values.client.id},
-        }, keycloak.tokenParsed.preferred_username).catch((err) => {
+        try {
+            await LoanService.addLoan({
+                returnDate: values.returnDate,
+                loanDate: dayjs().format("YYYY-MM-DD"),
+                status: "NORMAL",
+                toolLoaned: {name: values.tool.name},
+                client: {id: values.client.id},
+            }, keycloak.tokenParsed.preferred_username);
+            navigate("/loans"); // Only on success
+        } catch (err) {
             alert("Error registering loan: " + err.response.data.message);
-        });
-        navigate("/loans");
+        }
     };
 
     return (

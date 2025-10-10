@@ -12,7 +12,17 @@ const getFilteredKardex = (startDate, endDate, toolId) => {
     return httpClient.get(`/api/kardex/filter?${params.toString()}`);
 };
 
+const getLoanByMonthAndToolName = () => {
+    return httpClient.get("/api/kardex/loansByMonthAndToolName");
+}
+
+const getMostRequestedTool = () => {
+    return httpClient.get("/api/kardex/mostRequestedTool");
+}
+
 export default {
     getAll,
     getFilteredKardex,
+    getLoanByMonthAndToolName,
+    getMostRequestedTool
 }
