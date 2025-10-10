@@ -27,6 +27,7 @@ const Loans = () => {
     const columns = [
         { field: "id", headerName: "ID", headerAlign: "center", align: "center" },
         { field: "toolLoaned", headerName: "Herramienta", flex: 1, headerAlign: "center", align: "center" },
+        { field: "toolId", headerName: "ID Herramienta", flex: 1, headerAlign: "center", align: "center" },
         { field: "client", headerName: "RUT Cliente", flex: 1, headerAlign: "center", align: "center" },
         { field: "loanDate", headerName: "Fecha Préstamo", flex: 1, headerAlign: "center", align: "center" },
         { field: "returnDate", headerName: "Fecha Devolución", flex: 1, headerAlign: "center", align: "center" },
