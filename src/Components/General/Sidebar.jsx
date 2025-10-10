@@ -16,6 +16,14 @@ import * as React from "react";
 import keycloak from "../../services/keycloak.js";
 import { useNavigate } from "react-router-dom";
 import {Inventory2Outlined} from "@mui/icons-material";
+import PeopleAltOutlinedIcon from '@mui/icons-material/PeopleAltOutlined';
+import BuildCircleOutlinedIcon from '@mui/icons-material/BuildCircleOutlined';
+import AddTaskOutlinedIcon from '@mui/icons-material/AddTaskOutlined';
+import AssignmentTurnedInOutlinedIcon from '@mui/icons-material/AssignmentTurnedInOutlined';
+import FactCheckOutlinedIcon from '@mui/icons-material/FactCheckOutlined';
+import BarChartOutlinedIcon from '@mui/icons-material/BarChartOutlined';
+import ShowChartOutlinedIcon from '@mui/icons-material/ShowChartOutlined';
+import PublicOutlinedIcon from '@mui/icons-material/PublicOutlined';
 
 const Item = ({ title, to ,icon ,selected, setSelected }) => {
     const theme = useTheme();
@@ -144,19 +152,19 @@ const SidebarMenu = () => {
                     color={colors.grey[300]}
                     sx={{ m: "15px 0 5px 20px" }}
                 >
-                    Información
+                    Info
                 </Typography>
                 <Item
                     title="Información Clientes"
                     to="/clients"
-                    icon={<ContactsOutlinedIcon />}
+                    icon={<PeopleAltOutlinedIcon />} // Cambiado: icono de personas para clientes
                     selected={selected}
                     setSelected={setSelected}
                 />
                 <Item
                     title="Herramientas"
                     to="/tools"
-                    icon={<HandymanIcon />}
+                    icon={<BuildCircleOutlinedIcon />} // Cambiado: icono de herramientas
                     selected={selected}
                     setSelected={setSelected}
                 />
@@ -166,19 +174,19 @@ const SidebarMenu = () => {
                     color={colors.grey[300]}
                     sx={{ m: "15px 0 5px 20px" }}
                 >
-                    Prestamos
+                    Rentas
                 </Typography>
                 <Item
                     title="Nuevo Préstamo"
                     to="/loanTool"
-                    icon={<CreditScoreIcon />}
+                    icon={<AddTaskOutlinedIcon />} // Cambiado: icono de agregar tarea para nuevo préstamo
                     selected={selected}
                     setSelected={setSelected}
                 />
                 <Item
                     title="Prestamos Activos"
                     to="/loans"
-                    icon={<ChecklistRtlIcon />}
+                    icon={<AssignmentTurnedInOutlinedIcon />} // Cambiado: icono de tarea completada para préstamos activos
                     selected={selected}
                     setSelected={setSelected}
                 />
@@ -187,33 +195,19 @@ const SidebarMenu = () => {
                     color={colors.grey[300]}
                     sx={{ m: "15px 0 5px 20px" }}
                 >
-                    Reportes y Estadísticas
+                    Datos
                 </Typography>
                 <Item
                     title="kardex"
                     to="/kardex"
-                    icon={<Inventory2OutlinedIcon />}
+                    icon={<FactCheckOutlinedIcon />} // Cambiado: icono de verificación para kardex
                     selected={selected}
                     setSelected={setSelected}
                 />
                 <Item
                     title="Reporte"
                     to="/data"
-                    icon={<PieChartOutlineOutlinedIcon />}
-                    selected={selected}
-                    setSelected={setSelected}
-                />
-                <Item
-                    title="Line Chart"
-                    to="/line"
-                    icon={<TimelineOutlinedIcon />}
-                    selected={selected}
-                    setSelected={setSelected}
-                />
-                <Item
-                    title="Geography Chart"
-                    to="/geography"
-                    icon={<MapOutlinedIcon />}
+                    icon={<BarChartOutlinedIcon />} // Cambiado: icono de gráfico de barras para reporte
                     selected={selected}
                     setSelected={setSelected}
                 />
