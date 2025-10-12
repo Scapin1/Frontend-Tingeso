@@ -31,7 +31,7 @@ const MostRequestedToolCard = () => {
                 color: theme.palette.text.primary,
                 borderRadius: 3,
                 boxShadow: 3,
-                minHeight: 180,
+                minHeight: 140,
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'center',
@@ -47,11 +47,11 @@ const MostRequestedToolCard = () => {
                     alignItems: 'center'
                 }}
             >
-                <Avatar sx={{ bgcolor: colors.greenAccent[500], width: 56, height: 56, mb: 2 }}>
+                <Avatar sx={{ bgcolor: colors.greenAccent[500], width: 50, height: 50, mb: 2 }}>
                     <BuildIcon fontSize="large" />
                 </Avatar>
                 <Typography
-                    variant="subtitle2"
+                    variant="subtitle1"
                     color={colors.greenAccent[400]}
                     gutterBottom
                     fontWeight={700}

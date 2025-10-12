@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Grid, CircularProgress, Container } from "@mui/material";
+import {Grid, CircularProgress, Container, Stack} from "@mui/material";
 import ToolLoansChart from "./ToolLoansChart";
 import MostRequestedToolCard from "./MostRequestedToolCard";
 import TopClientsList from "./TopClientsList";
@@ -21,17 +21,14 @@ const ToolLoansDashboard = () => {
 
     return (
         <Container maxWidth="lg" sx={{ mt: 4, mb: 4, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-            <Grid container spacing={2} justifyContent="center" alignItems="flex-start">
+            <Grid container spacing={2} justifyContent="center">
                 <Grid item xs={12} md={8}>
                     <ToolLoansChart rawData={rawData} />
                 </Grid>
-                <Grid item xs={12} md={4}>
+                <Stack spacing={2} direction="column">
                     <MostRequestedToolCard />
-                </Grid>
-                <Grid item xs={12} md={4}>
                     <TopClientsList />
-                </Grid>
-                {/* Add more dashboard cards or charts here as needed */}
+                </Stack>
             </Grid>
         </Container>
     );

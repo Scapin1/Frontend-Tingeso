@@ -6,6 +6,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
 import { useState } from "react";
 
+
 const KardexFilter = ({ onFilter }) => {
     const [startDate, setStartDate] = useState(null);
     const [endDate, setEndDate] = useState(null);
@@ -33,14 +34,14 @@ const KardexFilter = ({ onFilter }) => {
                     label="Fecha inicio"
                     value={startDate}
                     onChange={setStartDate}
-                    format={'YYYY-MM-DD HH:mm:ss'}
+                    format={'YYYY-MM-DD'}
                     slotProps={{ textField: { size: "small" } }}
                 />
                 <DatePicker
                     label="Fecha fin"
                     value={endDate}
                     onChange={setEndDate}
-                    format={'YYYY-MM-DD HH:mm:ss'}
+                    format={'YYYY-MM-DD'}
                     slotProps={{ textField: { size: "small" } }}
                 />
             </LocalizationProvider>

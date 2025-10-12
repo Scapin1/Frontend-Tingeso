@@ -44,7 +44,7 @@ const TopClientsList = () => {
         >
             <CardContent sx={{ width: '100%', p: 3 }}>
                 <Typography
-                    variant="subtitle2"
+                    variant="subtitle1"
                     sx={{
                         color: colors.greenAccent[400],
                         fontWeight: 700,
