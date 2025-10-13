@@ -16,9 +16,20 @@ const returnLoan = (loanId, damaged, username) => {
 const getTopClients = () => {
     return httpClient.get('/api/loans/clientWithMostLoans');
 }
+
+const getClientsWithMostOverdues = () => {
+    return httpClient.get('/api/loans/clientsWithMostOverdues');
+}
+
+const getToolWithMostOverdues = () => {
+    return httpClient.get('/api/loans/toolWithMostOverdues');
+}
+
 export default {
     getAllLoans,
     addLoan,
     returnLoan,
-    getTopClients
+    getTopClients,
+    getClientsWithMostOverdues,
+    getToolWithMostOverdues
 }

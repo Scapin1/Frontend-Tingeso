@@ -7,7 +7,7 @@ const columns = [
     { field: "stock", headerName: "Cantidad", flex: 1, headerAlign: "center", align: "center" },
     {
         field: "repoFee",
-        headerName: "Repo Fee",
+        headerName: "Valor de Reposición",
         flex: 1,
         headerAlign: "center",
         align: "center",
@@ -15,7 +15,7 @@ const columns = [
     },
     {
         field: "maintenanceFee",
-        headerName: "Maintenance Fee",
+        headerName: "Valor de mantención",
         flex: 1,
         headerAlign: "center",
         align: "center",
@@ -23,7 +23,7 @@ const columns = [
     },
     {
         field: "rentalFee",
-        headerName: "Rental Fee",
+        headerName: "Valor de renta",
         flex: 1,
         headerAlign: "center",
         align: "center",
@@ -31,7 +31,7 @@ const columns = [
     },
     {
         field: "lateFee",
-        headerName: "Late Fee",
+        headerName: "Muta por atraso",
         flex: 1,
         headerAlign: "center",
         align: "center",

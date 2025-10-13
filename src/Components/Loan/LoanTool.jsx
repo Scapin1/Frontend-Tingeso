@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {Autocomplete, Box, Button} from "@mui/material";
 import { Formik } from "formik";
 import * as yup from "yup";
@@ -11,6 +11,8 @@ import LoanService from "../../services/loan.service.js";
 import { useNavigate } from "react-router-dom";
 import keycloak from "../../services/keycloak.js";
 import ErrorSnackbar from "../General/ErrorSnackbar";
+import { useTheme } from "@mui/material/styles";
+import { tokens } from "../../theme";
 
 const validationSchema = yup.object().shape({
     tool: yup.object().required("Herramienta requerida"),
@@ -25,10 +27,35 @@ const initialValues = {
 };
 
 const LoanTool = () => {
+    const theme = useTheme();
+    const colors = tokens(theme.palette.mode);
     const isNonMobile = useMediaQuery("(min-width:600px)");
     const navigate = useNavigate();
     const [error, setError] = useState("");
     const [openError, setOpenError] = useState(false);
+    const [estimatedCost, setEstimatedCost] = useState(null);
+    const [selectedTool, setSelectedTool] = useState(null);
+    const [selectedReturnDate, setSelectedReturnDate] = useState("");
+
+    useEffect(() => {
+        if (!selectedTool || !selectedReturnDate) {
+            setEstimatedCost(null);
+            return;
+        }
+        const dailyFee = selectedTool.rentalFee;
+        if (!dailyFee) {
+            setEstimatedCost(null);
+            return;
+        }
+        const today = dayjs().startOf('day');
+        const returnDate = dayjs(selectedReturnDate).startOf('day');
+        const days = returnDate.diff(today, 'day');
+        if (days <= 0) {
+            setEstimatedCost(null);
+            return;
+        }
+        setEstimatedCost(days * dailyFee);
+    }, [selectedTool, selectedReturnDate]);
 
     const handleFormSubmit = async (values) => {
         try {
@@ -86,7 +113,10 @@ const LoanTool = () => {
                         >
                             <ToolSelector
                                 value={values.tool}
-                                onChange={val => setFieldValue("tool", val)}
+                                onChange={val => {
+                                    setFieldValue("tool", val);
+                                    setSelectedTool(val);
+                                }}
                                 error={touched.tool && errors.tool}
                                 helperText={touched.tool && errors.tool}
                                 onBlur={handleBlur}
@@ -105,7 +135,9 @@ const LoanTool = () => {
                                 views={['year', 'month', 'day']}
                                 format={"YYYY-MM-DD"}
                                 onChange={date => {
-                                    setFieldValue("returnDate", date.format("YYYY-MM-DD"));
+                                    const formatted = date.format("YYYY-MM-DD");
+                                    setFieldValue("returnDate", formatted);
+                                    setSelectedReturnDate(formatted);
                                 }}
                                 slotProps={{
                                     textField: {
@@ -119,6 +151,24 @@ const LoanTool = () => {
                                 }}
                             />
                         </Box>
+                        {estimatedCost !== null && (
+                            <Box
+                                mt={2}
+                                mb={2}
+                                sx={{
+                                    color: colors.grey[100],
+                                    border: `1px solid ${colors.greenAccent[700]}`,
+                                    borderRadius: '6px',
+                                    padding: '6px 14px',
+                                    fontWeight: 500,
+                                    fontSize: '0.98rem',
+                                    display: 'inline-block',
+                                    boxShadow: '0 1px 4px 0 rgba(0,0,0,0.04)'
+                                }}
+                            >
+                                <span style={{fontWeight: 600}}>Costo estimado:</span> {estimatedCost.toLocaleString('es-CL', { style: 'currency', currency: 'CLP' })}
+                            </Box>
+                        )}
                         <Box display="flex" justifyContent="end" mt="20px">
                             <Button type="submit" color="primary" variant="contained">
                                 Registrar Préstamo
