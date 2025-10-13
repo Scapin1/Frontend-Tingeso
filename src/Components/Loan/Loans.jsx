@@ -4,10 +4,13 @@ import LoanService from "../../services/loan.service.js";
 import CustomTable from "../Other/CustomTable.jsx";
 import LoanStateChip from "./LoanStateChip.jsx";
 import ReturnLoanButton from "./ReturnLoanButton.jsx";
+import ErrorSnackbar from "../General/ErrorSnackbar";
 
 
 const Loans = () => {
     const [loans, setLoans] = useState([]);
+    const [error, setError] = useState("");
+    const [openError, setOpenError] = useState(false);
 
     useEffect(() => {
         init();
@@ -22,6 +25,16 @@ const Loans = () => {
             .catch((error) => {
                 console.error("There was an error!", error);
             });
+    };
+
+    const handleShowError = (msg) => {
+        setError(msg);
+        setOpenError(true);
+    };
+
+    const handleCloseError = (event, reason) => {
+        if (reason === 'clickaway') return;
+        setOpenError(false);
     };
 
     const columns = [
@@ -47,6 +60,7 @@ const Loans = () => {
                     toolId={params.row.toolLoaned.id}
                     status={params.row.status}
                     onReturned={init}
+                    onError={handleShowError}
                 />
             ),
         }
@@ -54,6 +68,11 @@ const Loans = () => {
 
     return (
         <Box m="50px">
+            <ErrorSnackbar
+                message={error}
+                open={openError}
+                onClose={handleCloseError}
+            />
             <CustomTable rows={loans} columns={columns}/>
         </Box>
     );

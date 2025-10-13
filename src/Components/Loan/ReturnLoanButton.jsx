@@ -5,7 +5,7 @@ import loanService from "../../services/loan.service.js";
 import ReturnLoanPopup from "./ReturnLoanPopup.jsx";
 import keycloak from "../../services/keycloak.js";
 
-const ReturnLoanButton = ({ loanId, status, onReturned }) => {
+const ReturnLoanButton = ({ loanId, status, onReturned, onError }) => {
     const disabled = status === "FINISHED" || status === "IN_REPAIR";
     const [open, setOpen] = useState(false);
     const [damaged, setDamaged] = useState(false);
@@ -17,7 +17,11 @@ const ReturnLoanButton = ({ loanId, status, onReturned }) => {
                     onReturned(); // refresca la vista desde el componente padre
                 }
             })
-            .catch((err) => console.error("Error al devolver préstamo:", err));
+            .catch((err) => {
+                if (typeof onError === "function") {
+                    onError(err?.response?.data?.message || err?.message || "Error al devolver préstamo");
+                }
+            });
         setOpen(false);
         setDamaged(false);
     };

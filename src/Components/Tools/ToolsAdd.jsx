@@ -1,9 +1,13 @@
-import { Box, Button, TextField, MenuItem, Select, InputLabel, FormControl, FormHelperText } from "@mui/material";
+import {Box, Button, TextField, MenuItem, Select, InputLabel, FormControl, FormHelperText} from "@mui/material";
 import { Formik } from "formik";
 import * as yup from "yup";
 import toolService from "../../services/tool.service.js";
 import {useNavigate} from "react-router-dom";
 import keycloak from "../../services/keycloak.js";
+import InputAdornment from "@mui/material/InputAdornment";
+import React, { useState } from "react";
+import ErrorSnackbar from "../General/ErrorSnackbar";
+
 
 function formatCLP(value) {
     if (!value) return "";
@@ -16,8 +20,15 @@ function formatCLP(value) {
 
 const ToolsAdd = () => {
     const navigate = useNavigate();
+    const [error, setError] = useState("");
+    const [openError, setOpenError] = useState(false);
     return (
         <Box m="20px">
+            <ErrorSnackbar
+                message={error}
+                open={openError}
+                onClose={() => setOpenError(false)}
+            />
             <Formik
                 initialValues={{
                     name: "",
@@ -37,12 +48,15 @@ const ToolsAdd = () => {
                         .required("Requerido")
                         .min(0, "Debe ser un número mayor o igual a 0"),
                 })}
-                onSubmit={values => {
+                onSubmit={async values => {
                     values.repoFee = Number(values.repoFee.replace(/\D/g, ""));
-                    toolService.add(values, keycloak.tokenParsed.preferred_username).then(() =>{
-                            navigate("/tools");
-                        }
-                    )
+                    try {
+                        await toolService.add(values, keycloak.tokenParsed.preferred_username);
+                        navigate("/tools");
+                    } catch (error) {
+                        setError(error?.response?.data?.message || error?.message || "Error al crear herramienta");
+                        setOpenError(true);
+                    }
                 }}
             >
                 {({
@@ -103,6 +117,11 @@ const ToolsAdd = () => {
                                 sx={{ gridColumn: "span 2" }}
                                 inputMode="numeric"
                                 pattern="[0-9]*"
+                                slotProps={{
+                                    input: {
+                                        startAdornment: <InputAdornment position="start">$</InputAdornment>
+                                    }
+                                }}
                             />
                             <TextField
                                 fullWidth

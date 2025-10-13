@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {Autocomplete, Box, Button} from "@mui/material";
 import { Formik } from "formik";
 import * as yup from "yup";
@@ -10,6 +10,7 @@ import ClientSelector from "./ClientSelector.jsx";
 import LoanService from "../../services/loan.service.js";
 import { useNavigate } from "react-router-dom";
 import keycloak from "../../services/keycloak.js";
+import ErrorSnackbar from "../General/ErrorSnackbar";
 
 const validationSchema = yup.object().shape({
     tool: yup.object().required("Herramienta requerida"),
@@ -26,9 +27,13 @@ const initialValues = {
 const LoanTool = () => {
     const isNonMobile = useMediaQuery("(min-width:600px)");
     const navigate = useNavigate();
+    const [error, setError] = useState("");
+    const [openError, setOpenError] = useState(false);
 
     const handleFormSubmit = async (values) => {
         try {
+            setError("");
+            setOpenError(false);
             await LoanService.addLoan({
                 returnDate: values.returnDate,
                 loanDate: dayjs().format("YYYY-MM-DD"),
@@ -36,14 +41,27 @@ const LoanTool = () => {
                 toolLoaned: {name: values.tool.name},
                 client: {id: values.client.id},
             }, keycloak.tokenParsed.preferred_username);
-            navigate("/loans"); // Only on success
+            navigate("/loans");
         } catch (err) {
-            alert("Error registering loan: " + err.response.data.message);
+            setError(err?.response?.data?.message || err?.message || "Error al registrar el préstamo");
+            setOpenError(true);
         }
+    };
+
+    const handleCloseError = (event, reason) => {
+        if (reason === 'clickaway') return;
+        setOpenError(false);
     };
 
     return (
         <Box m="20px">
+            {openError && (
+                <ErrorSnackbar
+                    message={error}
+                    open={openError}
+                    onClose={handleCloseError}
+                />
+            )}
             <Formik
                 initialValues={initialValues}
                 validationSchema={validationSchema}

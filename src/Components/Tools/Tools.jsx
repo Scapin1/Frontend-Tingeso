@@ -1,4 +1,4 @@
-import {Box, useTheme, TextField, } from "@mui/material";
+import {Box, useTheme, TextField, Alert,} from "@mui/material";
 import { useEffect, useState } from "react";
 import { tokens } from "../../theme.js";
 import toolService from "../../services/tool.service.js";
@@ -39,7 +39,7 @@ const Tools = () => {
                 setTools(response.data.map((tool, idx) => ({ ...tool, id: idx + 1 })));
             })
             .catch((error) => {
-                console.error("There was an error!", error);
+                <Alert severity="error">{error.response.data.message}</Alert>
             });
     };
 
