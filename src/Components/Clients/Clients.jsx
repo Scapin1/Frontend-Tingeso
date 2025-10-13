@@ -9,6 +9,7 @@ import ClientService from "../../services/client.service.js";
 import ClientStateChip from "./ClientStateChip.jsx";
 import EditIcon from '@mui/icons-material/Edit';
 import ClientEditDialog from "./ClientEditDialog.jsx";
+import formatPesoCL from "../Format/formatPesoCL.js";
 
 
 const Clients = () => {
@@ -71,7 +72,7 @@ const Clients = () => {
         { field: "email", headerName: "Email", flex: 1, headerAlign: "center", align: "center" },
         { field: "rut", headerName: "RUT", flex: 1, headerAlign: "center", align: "center" },
         { field: "phoneNumber", headerName: "Teléfono", flex: 1, headerAlign: "center", align: "center", },
-        { field: "debt", headerName: "Deuda", flex: 1, headerAlign: "center", align: "center" },
+        { field: "debt", headerName: "Deuda", flex: 1, headerAlign: "center", align: "center", renderCell: (params) => formatPesoCL(params.value)},
         { field: "clientState", headerName: "Estado", flex: 1, headerAlign: "center", align: "center", renderCell: (params) => <ClientStateChip state={params.value} />, },
         {
             field: "actions",
