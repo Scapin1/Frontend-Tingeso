@@ -25,11 +25,35 @@ const getToolWithMostOverdues = () => {
     return httpClient.get('/api/loans/toolWithMostOverdues');
 }
 
+const getClientsWithMostLoansInRange = (startDate, endDate) => {
+    const params = new URLSearchParams();
+    if (startDate) params.append("startDate", startDate);
+    if (endDate) params.append("endDate", endDate);
+    return httpClient.get(`/api/loans/clientsWithMostLoansInRange?${params.toString()}`);
+};
+
+const getClientsWithMostOverduesInRange = (startDate, endDate) => {
+    const params = new URLSearchParams();
+    if (startDate) params.append("startDate", startDate);
+    if (endDate) params.append("endDate", endDate);
+    return httpClient.get(`/api/loans/clientsWithMostOverduesInRange?${params.toString()}`);
+};
+
+const getToolWithMostOverduesInRange = (startDate, endDate) => {
+    const params = new URLSearchParams();
+    if (startDate) params.append("startDate", startDate);
+    if (endDate) params.append("endDate", endDate);
+    return httpClient.get(`/api/loans/toolWithMostOverduesInRange?${params.toString()}`);
+};
+
 export default {
     getAllLoans,
     addLoan,
     returnLoan,
     getTopClients,
     getClientsWithMostOverdues,
-    getToolWithMostOverdues
+    getToolWithMostOverdues,
+    getClientsWithMostLoansInRange,
+    getClientsWithMostOverduesInRange,
+    getToolWithMostOverduesInRange
 }

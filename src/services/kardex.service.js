@@ -20,9 +20,25 @@ const getMostRequestedTool = () => {
     return httpClient.get("/api/kardex/mostRequestedTool");
 }
 
+const getMostRequestedToolInRange = (startDate, endDate) => {
+    const params = new URLSearchParams();
+    if (startDate) params.append("startDate", startDate);
+    if (endDate) params.append("endDate", endDate);
+    return httpClient.get(`/api/kardex/mostRequestedToolInRange?${params.toString()}`);
+};
+
+const getRequestedToolsInRange = (startDate, endDate) => {
+    const params = new URLSearchParams();
+    if (startDate) params.append("startDate", startDate);
+    if (endDate) params.append("endDate", endDate);
+    return httpClient.get(`/api/kardex/requestedToolsInRange?${params.toString()}`);
+};
+
 export default {
     getAll,
     getFilteredKardex,
     getLoanByMonthAndToolName,
-    getMostRequestedTool
+    getMostRequestedTool,
+    getMostRequestedToolInRange,
+    getRequestedToolsInRange
 }

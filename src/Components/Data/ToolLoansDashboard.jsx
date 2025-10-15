@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Grid, CircularProgress, Container, Typography, Box, Button } from "@mui/material";
+import { Grid, CircularProgress, Box, Button } from "@mui/material";
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import ToolLoansChart from "./ToolLoansChart";
 import MostRequestedToolCard from "./MostRequestedToolCard";
@@ -14,6 +14,11 @@ import { TabContext, TabList, TabPanel} from '@mui/lab';
 import Tab from '@mui/material/Tab';
 import { useTheme } from '@mui/material/styles';
 import { tokens } from '../../theme.js';
+import MostRequestedToolInRangeCard from "./MostRequestedToolInRangeCard";
+import RequestedToolsInRangeChart from "./RequestedToolsInRangeChart";
+import ToolWithMostOverduesInRangeCard from "./ToolWithMostOverduesInRangeCard";
+import TopClientsInRangeList from "./TopClientsInRangeList";
+import TopOverdueClientsInRangeList from "./TopOverdueClientsInRangeList";
 
 
 const ToolLoansDashboard = () => {
@@ -22,13 +27,6 @@ const ToolLoansDashboard = () => {
     const [dateFrom, setDateFrom] = useState(null);
     const [dateTo, setDateTo] = useState(null);
     const [filteredLoading, setFilteredLoading] = useState(false);
-    const [filteredData, setFilteredData] = useState({
-        chart: [],
-        mostRequestedTool: null,
-        toolWithMostOverdues: null,
-        topClients: [],
-        topOverdueClients: []
-    });
 
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
@@ -43,13 +41,6 @@ const ToolLoansDashboard = () => {
         if (!dateFrom || !dateTo) return;
         setFilteredLoading(true);
         setTimeout(() => {
-            setFilteredData({
-                chart: [],
-                mostRequestedTool: null,
-                toolWithMostOverdues: null,
-                topClients: [],
-                topOverdueClients: []
-            });
             setFilteredLoading(false);
         }, 1000);
     };
@@ -69,6 +60,8 @@ const ToolLoansDashboard = () => {
             <TabContext value={value}>
                 <TabList
                     onChange={handleChange}
+                    textColor="inherit"
+                    indicatorColor="secondary"
                     sx={{
                         backgroundColor: colors.primary[500],
                         borderRadius: 2,
@@ -77,35 +70,33 @@ const ToolLoansDashboard = () => {
                             color: colors.grey[500],
                             fontWeight: 600,
                         },
-                        '& .Mui-selected': {
-                            color: colors.greenAccent[400],
-                        },
                         '& .MuiTabs-indicator': {
                             backgroundColor: colors.greenAccent[400],
                         },
                     }}
                 >
-                    <Tab label="Global" value="1" />
-                    <Tab label="Por rango de fechas" value="2" />
+                    <Tab label="Global" value="1" sx={{ '&.Mui-selected': { color: colors.greenAccent[500] } }} />
+                    <Tab label="Por rango de fechas" value="2" sx={{ '&.Mui-selected': { color: colors.greenAccent[500] } }} />
                 </TabList>
                 {/* GLOBAL SECTION */}
                 <TabPanel value="1">
                     <Grid container spacing={3} sx={{ minHeight: '50vh' }}>
-                        <Grid item xs={12} md={8} lg={8} xl={8}>
+                        <Grid item xs={12} md={8}>
                             <ToolLoansChart rawData={rawData} />
                         </Grid>
-                        <Grid item xs={12} md={4} lg={4} xl={4}>
+                        <Grid item xs={12} md={4}>
                             <Stack spacing={2}>
                                 <MostRequestedToolCard />
                                 <ToolWithMostOverduesCard />
                             </Stack>
                         </Grid>
-                        <Grid item xs={12} md={4} lg={4} xl={4}>
+                        <Grid item xs={12} md={4}>
                             <TopClientsList />
                         </Grid>
-                        <Grid item xs={12} md={4} lg={4} xl={4}>
+                        <Grid item xs={12} md={4}>
                             <TopOverdueClientsList />
                         </Grid>
+                        <Grid item xs={false} md={4} />
                     </Grid>
                 </TabPanel>
                 {/* FILTRABLE POR RANGO DE FECHAS */}
@@ -127,33 +118,27 @@ const ToolLoansDashboard = () => {
                             <Button variant="contained" color="primary" onClick={handleFilter} disabled={!dateFrom || !dateTo || filteredLoading}>
                                 Filtrar
                             </Button>
+                            <Button variant="outlined" color="secondary" onClick={() => { setDateFrom(null); setDateTo(null); }} disabled={!dateFrom && !dateTo}>
+                                Limpiar
+                            </Button>
                         </Box>
                         <Grid container spacing={3} sx={{ minHeight: '50vh' }}>
-                            <Grid item xs={12} md={8} lg={8} xl={8}>
-                                <Box sx={{ height: 200, bgcolor: colors.primary[800], borderRadius: 2, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                                    <Typography variant="body1" color={colors.grey[300]}>(Gráfico filtrado por fechas)</Typography>
-                                </Box>
+                            <Grid item xs={12} md={8}>
+                                <RequestedToolsInRangeChart dateFrom={dateFrom} dateTo={dateTo} />
                             </Grid>
-                            <Grid item xs={12} md={4} lg={4} xl={4}>
+                            <Grid item xs={12} md={4}>
                                 <Stack spacing={2}>
-                                    <Box sx={{ height: 140, bgcolor: colors.greenAccent[700], borderRadius: 2, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                                        <Typography variant="body2" color={colors.grey[100]}>(Herramienta más arrendada filtrada)</Typography>
-                                    </Box>
-                                    <Box sx={{ height: 140, bgcolor: colors.redAccent[700], borderRadius: 2, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                                        <Typography variant="body2" color={colors.grey[100]}>(Herramienta con más atrasos filtrada)</Typography>
-                                    </Box>
+                                    <MostRequestedToolInRangeCard dateFrom={dateFrom} dateTo={dateTo} />
+                                    <ToolWithMostOverduesInRangeCard dateFrom={dateFrom} dateTo={dateTo} />
                                 </Stack>
                             </Grid>
-                            <Grid item xs={12} md={4} lg={4} xl={4}>
-                                <Box sx={{ height: 200, bgcolor: colors.blueAccent[700], borderRadius: 2, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                                    <Typography variant="body2" color={colors.grey[100]}>(Top clientes filtrado)</Typography>
-                                </Box>
+                            <Grid item xs={12} md={4}>
+                                <TopClientsInRangeList dateFrom={dateFrom} dateTo={dateTo} />
                             </Grid>
-                            <Grid item xs={12} md={4} lg={4} xl={4}>
-                                <Box sx={{ height: 200, bgcolor: colors.redAccent[400], borderRadius: 2, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                                    <Typography variant="body2" color={colors.grey[100]}>(Clientes con más atrasos filtrado)</Typography>
-                                </Box>
+                            <Grid item xs={12} md={4}>
+                                <TopOverdueClientsInRangeList dateFrom={dateFrom} dateTo={dateTo} />
                             </Grid>
+                            <Grid item xs={false} md={4} />
                         </Grid>
                     </Box>
                 </TabPanel>

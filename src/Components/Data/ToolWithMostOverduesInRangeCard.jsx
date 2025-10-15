@@ -13,19 +13,33 @@ import BuildIcon from '@mui/icons-material/Build';
 import loanService from "../../services/loan.service";
 import { tokens } from "../../theme";
 
-const ToolWithMostOverduesCard = ({ sx }) => {
+const ToolWithMostOverduesInRangeCard = ({ dateFrom, dateTo }) => {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
     const [tool, setTool] = useState(null);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
 
+    const formatToLocalDate = (date) => {
+        if (!date) return null;
+        if (typeof date === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(date)) return date;
+        if (typeof date === 'string') return date.slice(0, 10);
+        if (date.format) return date.format('YYYY-MM-DD'); // dayjs
+        if (date instanceof Date) return date.toISOString().slice(0, 10);
+        return String(date).slice(0, 10);
+    };
+
     useEffect(() => {
-        loanService.getToolWithMostOverdues()
+        const startDate = formatToLocalDate(dateFrom);
+        const endDate = formatToLocalDate(dateTo);
+        if (!startDate || !endDate) return;
+        setLoading(true);
+        setError("");
+        loanService.getToolWithMostOverduesInRange(startDate, endDate)
             .then(res => setTool(res.data))
             .catch(() => setError("No se pudo cargar la información de herramienta con más atrasos."))
             .finally(() => setLoading(false));
-    }, []);
+    }, [dateFrom, dateTo]);
 
     return (
         <Card
@@ -39,7 +53,6 @@ const ToolWithMostOverduesCard = ({ sx }) => {
                 flexDirection: 'column',
                 justifyContent: 'center',
                 alignItems: 'center',
-                ...sx
             }}
         >
             <CardContent
@@ -62,12 +75,16 @@ const ToolWithMostOverduesCard = ({ sx }) => {
                 >
                     Herramienta con más atrasos
                 </Typography>
-                {loading ? (
+                {(!dateFrom || !dateTo) ? (
+                    <Typography variant="body2" color={theme.palette.text.secondary}>
+                        Seleccione un rango de fechas
+                    </Typography>
+                ) : loading ? (
                     <CircularProgress color="error" size={28} />
                 ) : error ? (
                     <Typography color={colors.redAccent[100]}>{error}</Typography>
                 ) : !tool || !tool.toolName ? (
-                    <Typography color={colors.redAccent[100]}>No hay datos de atrasos.</Typography>
+                    <Typography color={theme.palette.text.secondary}>No hay datos.</Typography>
                 ) : (
                     <Box textAlign="center">
                         <Box>
@@ -83,4 +100,4 @@ const ToolWithMostOverduesCard = ({ sx }) => {
     );
 };
 
-export default ToolWithMostOverduesCard;
+export default ToolWithMostOverduesInRangeCard;
