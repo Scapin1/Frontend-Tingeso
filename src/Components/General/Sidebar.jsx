@@ -62,7 +62,7 @@ const SidebarMenu = () => {
             <Sidebar collapsed={isCollapsed}
                 rootStyles={{
                     [`.${sidebarClasses.container}`]: {
-                        backgroundColor: colors.primary[400],
+                        backgroundColor: colors.primary[600],
                         backgroundImage: "none",
                         boxShadow: "none",
                         height: '100vh', // Ensure sidebar fills the viewport
@@ -73,12 +73,10 @@ const SidebarMenu = () => {
             >
             <Menu iconShape="square"
                 menuItemStyles={{
-                    button: ({ active, disabled }) => ({
-                        color: disabled ? colors.grey[300] : colors.grey[100],
-                        backgroundColor: active ? colors.primary[600] : "transparent",
+                    button: ({ active }) => ({
+                        backgroundColor: active ? colors.primary[700] : "transparent",
                         "&:hover": {
-                            color: colors.primary[400],
-                            backgroundColor: colors.primary[500],
+                            backgroundColor: colors.primary[700],
                         },
                     }),
                 }}
@@ -116,7 +114,7 @@ const SidebarMenu = () => {
                             width: 64,
                             height: 64,
                             borderRadius: "50%",
-                            background: colors.primary[600],
+                            background: colors.primary[700],
                             display: "flex",
                             alignItems: "center",
                             justifyContent: "center",

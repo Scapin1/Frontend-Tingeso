@@ -63,20 +63,19 @@ const ToolLoansDashboard = () => {
                     textColor="inherit"
                     indicatorColor="secondary"
                     sx={{
-                        backgroundColor: colors.primary[500],
-                        borderRadius: 2,
+                        backgroundColor: colors.primary[600],
                         minHeight: 48,
                         '& .MuiTab-root': {
-                            color: colors.grey[500],
+                            color: colors.grey[100],
                             fontWeight: 600,
                         },
                         '& .MuiTabs-indicator': {
-                            backgroundColor: colors.greenAccent[400],
+                            backgroundColor: colors.greenAccent[500],
                         },
                     }}
                 >
-                    <Tab label="Global" value="1" sx={{ '&.Mui-selected': { color: colors.greenAccent[500] } }} />
-                    <Tab label="Por rango de fechas" value="2" sx={{ '&.Mui-selected': { color: colors.greenAccent[500] } }} />
+                    <Tab label="Global" value="1" sx={{ '&.Mui-selected': { color: colors.greenAccent[600] } }} />
+                    <Tab label="Por rango de fechas" value="2" sx={{ '&.Mui-selected': { color: colors.greenAccent[600] } }} />
                 </TabList>
                 {/* GLOBAL SECTION */}
                 <TabPanel value="1">

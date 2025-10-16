@@ -43,7 +43,7 @@ const ToolLoansChart = ({ rawData }) => {
     }));
 
     return (
-        <Card sx={{ background: colors.primary[400], display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        <Card sx={{ background: colors.primary[600], display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
             <CardContent sx={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
                 <Typography
                     variant="h6"
@@ -61,8 +61,8 @@ const ToolLoansChart = ({ rawData }) => {
                         legend={{ position: { vertical: "top", horizontal: "right" } }}
                         sx={{
                             borderRadius: 2,
-                            "& .MuiChartsAxis-root": { color: theme.palette.text.primary },
-                            "& .MuiChartsLegend-root": { color: theme.palette.text.primary },
+                            "& .MuiChartsAxis-root": { color: colors.primary[200] },
+                            "& .MuiChartsLegend-root": { color: colors.primary[200] },
                         }}
                     />
                 </Box>

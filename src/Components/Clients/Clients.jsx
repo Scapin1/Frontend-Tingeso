@@ -99,7 +99,7 @@ const Clients = () => {
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
                     size="small"
-                    sx={{ background: colors.primary[400], borderRadius: 1 }}
+                    sx={{ background: colors.primary[600], borderRadius: 1 }}
                 />
                 <Box display="flex" justifyContent="flex-end" gap={2}>
                     <button

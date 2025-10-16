@@ -34,7 +34,7 @@ const ReturnLoanPopup = ({ open, onClose, onConfirm, damaged, setDamaged }) => {
         >
             <Box
                 sx={{
-                    backgroundColor: colors.primary[400],
+                    backgroundColor: colors.primary[600],
                     padding: "30px",
                     borderRadius: "10px",
                     width: "400px",

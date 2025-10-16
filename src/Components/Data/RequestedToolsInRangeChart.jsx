@@ -51,7 +51,7 @@ const RequestedToolsInRangeChart = ({ dateFrom, dateTo }) => {
     }, [data]);
 
     return (
-        <Card sx={{ background: colors.primary[400], display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: 200 }}>
+        <Card sx={{ background: colors.primary[600], display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: 200 }}>
             <CardContent sx={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
                 <Typography
                     variant="h6"
@@ -84,8 +84,8 @@ const RequestedToolsInRangeChart = ({ dateFrom, dateTo }) => {
                             legend={{ position: { vertical: "top", horizontal: "right" } }}
                             sx={{
                                 borderRadius: 2,
-                                "& .MuiChartsAxis-root": { color: theme.palette.text.primary },
-                                "& .MuiChartsLegend-root": { color: theme.palette.text.primary },
+                                "& .MuiChartsAxis-root": { color: colors.primary[200] },
+                                "& .MuiChartsLegend-root": { color: colors.primary[200] },
                             }}
                         />
                     </Box>

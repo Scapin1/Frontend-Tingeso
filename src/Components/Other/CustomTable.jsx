@@ -8,6 +8,7 @@ const CustomTable = ({rows, columns}) => {
     return(
     <Box
         height="70vh"
+        width="82vw"
         sx={{
             "& .MuiDataGrid-root": { border: "none" },
             "& .MuiDataGrid-cell": { borderBottom: "none" },
@@ -16,7 +17,7 @@ const CustomTable = ({rows, columns}) => {
                 borderBottom: "none",
             },
             "& .MuiDataGrid-virtualScroller": {
-                backgroundColor: colors.primary[400],
+                backgroundColor: colors.primary[600],
             },
             "& .MuiDataGrid-footerContainer": {
                 borderTop: "none",

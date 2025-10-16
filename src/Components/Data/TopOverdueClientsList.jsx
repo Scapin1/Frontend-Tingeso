@@ -23,7 +23,7 @@ const TopOverdueClientsList = ({ sx }) => {
     return (
         <Card
             sx={{
-                background: colors.primary[400],
+                background: colors.primary[600],
                 color: theme.palette.text.primary,
                 borderRadius: 3,
                 boxShadow: 3,

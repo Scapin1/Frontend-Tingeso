@@ -1,22 +1,19 @@
 import { Box, IconButton, useTheme } from "@mui/material";
 import {useContext, useEffect, useState} from "react";
-import { ColorModeContext, tokens } from "../../theme.js";
-import InputBase from "@mui/material/InputBase";
+import {ColorModeContext, tokens} from "../../theme.js";
 import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
-import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined";
-import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import LoginIcon from "@mui/icons-material/Login";
 import LogoutIcon from "@mui/icons-material/Logout";
-import SearchIcon from "@mui/icons-material/Search";
 import keycloak from "../../services/keycloak.js";
+import {redirect} from "react-router-dom";
 
 
 const Topbar = () => {
     const theme = useTheme();
-    const colors = tokens(theme.palette.mode);
     const [isAuthenticated, setIsAuthenticated] = useState(keycloak.authenticated);
     const colorMode = useContext(ColorModeContext);
+    const colors = tokens(theme.palette.mode);
 
     useEffect(() => {
         const handleAuth = () => {
@@ -35,11 +32,18 @@ const Topbar = () => {
     };
 
     const handleLogout = () => {
-        keycloak.logout();
+        keycloak.logout({redirectUri:"http://localhost:5173/" });
     };
 
     return (
-        <Box display="flex" justifyContent="right" p={2} >
+        <Box display="flex" justifyContent="right" p={2} bgcolor={colors.primary[600]} width="100%" >
+            <IconButton onClick={colorMode.toggleColorMode}>
+                {theme.palette.mode === "dark" ? (
+                    <DarkModeOutlinedIcon />
+                ) : (
+                    <LightModeOutlinedIcon />
+                )}
+            </IconButton>
             <IconButton>
                 {isAuthenticated ?
                     <LogoutIcon onClick={handleLogout} />

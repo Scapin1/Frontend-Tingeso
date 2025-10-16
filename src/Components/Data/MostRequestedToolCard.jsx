@@ -27,7 +27,7 @@ const MostRequestedToolCard = () => {
     return (
         <Card
             sx={{
-                background: colors.primary[400],
+                background: colors.primary[600],
                 color: theme.palette.text.primary,
                 borderRadius: 3,
                 boxShadow: 3,
@@ -62,10 +62,10 @@ const MostRequestedToolCard = () => {
                     <CircularProgress color="inherit" size={32} sx={{ mt: 2 }} />
                 ) : toolInfo && toolInfo.toolName ? (
                     <Box textAlign="center">
-                        <Typography variant="h6" fontWeight={700} color={colors.blueAccent[200]}>
+                        <Typography variant="h6" fontWeight={700} color={colors.blueAccent[300]}>
                             {toolInfo.toolName}
                         </Typography>
-                        <Typography variant="body2" color={colors.greenAccent[200]} fontWeight={500}>
+                        <Typography variant="body2" color={colors.greenAccent[100]} fontWeight={500}>
                             {toolInfo.requestCount} préstamos
                         </Typography>
                     </Box>

@@ -17,7 +17,7 @@ const Home = () => {
             maxWidth="md"
             sx={{
                 mt: 6,
-                backgroundColor: colors.primary[400],
+                backgroundColor: colors.primary[600],
                 borderRadius: 2,
                 boxShadow: 2,
                 p: 4,
@@ -27,7 +27,7 @@ const Home = () => {
                 variant="h3"
                 component="h1"
                 gutterBottom
-                sx={{ color: colors.greenAccent[500] }}
+                sx={{ color: colors.greenAccent[400] }}
             >
                 ToolRent · Panel Interno de Gestión
             </Typography>
@@ -59,7 +59,7 @@ const Home = () => {
                         </ListItemIcon>
                         <ListItemText
                             primary={text}
-                            primaryTypographyProps={{ sx: { color: colors.grey[100] } }}
+                            sx={{ color: colors.grey[100] }}
                         />
                     </ListItem>
                 ))}

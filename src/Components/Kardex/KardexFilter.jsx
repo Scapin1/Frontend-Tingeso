@@ -5,12 +5,16 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
 import { useState } from "react";
+import {tokens} from "../../theme.js";
+import {useTheme} from "@mui/material/styles";
 
 
 const KardexFilter = ({ onFilter }) => {
     const [startDate, setStartDate] = useState(null);
     const [endDate, setEndDate] = useState(null);
     const [toolId, setToolId] = useState("");
+    const theme = useTheme();
+    const colors = tokens(theme.palette.mode);
 
     const handleFilter = () => {
         onFilter({
@@ -51,7 +55,7 @@ const KardexFilter = ({ onFilter }) => {
                 onChange={e => setToolId(e.target.value)}
                 size="small"
             />
-            <Button variant="contained" color="primary" onClick={handleFilter}>
+            <Button variant="contained" color="colors.primary[600]" onClick={handleFilter}>
                 Filtrar
             </Button>
             <Button variant="outlined" color="secondary" onClick={handleClear}>

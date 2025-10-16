@@ -42,7 +42,7 @@ function ToolChangeFeeDialog({ open, onClose, onSave, onChange, fees }) {
         <Dialog open={open} onClose={onClose} fullWidth maxWidth="sm" slotProps={{
             paper: {
                 sx: {
-                    backgroundColor: colors.primary[500],
+                    backgroundColor: colors.primary[600],
                     padding: 2
                 }
             }

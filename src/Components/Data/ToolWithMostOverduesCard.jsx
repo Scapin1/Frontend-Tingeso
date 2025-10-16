@@ -30,8 +30,8 @@ const ToolWithMostOverduesCard = ({ sx }) => {
     return (
         <Card
             sx={{
-                background: colors.primary[400],
-                color: theme.palette.text.primary,
+                background: colors.primary[600],
+                color: colors.primary[300],
                 borderRadius: 3,
                 boxShadow: 3,
                 minHeight: 180,

@@ -36,7 +36,7 @@ const TopOverdueClientsInRangeList = ({ dateFrom, dateTo }) => {
 
     return (
         <Card sx={{
-            background: colors.primary[400],
+            background: colors.primary[600],
             color: colors.grey[100],
             borderRadius: 3,
             boxShadow: 3,
