@@ -37,7 +37,7 @@ const Kardex = () => {
         { field: "id", headerName: "ID", headerAlign: "center", align: "center" },
         { field: "toolId", headerName: "Id Herramienta", flex: 1, headerAlign: "center", align: "center" },
         { field: "toolName", headerName: "Nombre Herramienta", flex: 1, headerAlign: "center", align: "center" },
-        { field: "user", headerName: "Usuario", flex: 1, headerAlign: "center", align: "center" },
+        { field: "userName", headerName: "Usuario", flex: 1, headerAlign: "center", align: "center" },
         { field: "quantity", headerName: "Cantidad afectada", flex: 1, headerAlign: "center", align: "center" },
         { field: "movementDate", headerName: "Fecha del movimiento", flex: 1, headerAlign: "center", align: "center", renderCell: (params) => dayjs(params.value).format("DD/MM/YYYY HH:mm") },
         { field: "type", headerName: "Tipo de movimiento", flex: 1, headerAlign: "center", align: "center", renderCell: (params) => <KardexStateChip state={params.value} />,}
