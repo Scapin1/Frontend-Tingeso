@@ -1,9 +1,7 @@
 import Keycloak from "keycloak-js";
 
-const KEYCLOAK_URL = import.meta.env.VITE_KEYCLOAK_URL;
-
 const keycloak = new Keycloak({
-    url: KEYCLOAK_URL,
+    url: 'http://localhost:9090',
     realm: 'ToolRent',
     clientId: 'FrontEnd'
 });
