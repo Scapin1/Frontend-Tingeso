@@ -43,13 +43,13 @@ const ToolLoansChart = ({ rawData }) => {
     }));
 
     return (
-        <Card sx={{ background: colors.primary[600], display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        <Card sx={{background: colors.primary[600], display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
             <CardContent sx={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
                 <Typography
-                    variant="h6"
+                    variant="h4"
                     gutterBottom
                     align="center"
-                    sx={{ color: colors.greenAccent[400], fontWeight: 700 }}
+                    sx={{ color: colors.greenAccent[600], fontWeight: 700 }}
                 >
                     Préstamo de Herramientas por Mes
                 </Typography>

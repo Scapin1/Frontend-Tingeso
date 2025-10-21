@@ -27,7 +27,7 @@ const Home = () => {
                 variant="h3"
                 component="h1"
                 gutterBottom
-                sx={{ color: colors.greenAccent[400] }}
+                sx={{ color: colors.greenAccent[600] }}
             >
                 ToolRent · Panel Interno de Gestión
             </Typography>
@@ -39,7 +39,7 @@ const Home = () => {
             <Typography
                 variant="h6"
                 gutterBottom
-                sx={{ mt: 3, color: colors.greenAccent[400] }}
+                sx={{ mt: 3, color: colors.greenAccent[600] }}
             >
                 Funcionalidades clave
             </Typography>

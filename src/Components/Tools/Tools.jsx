@@ -45,7 +45,7 @@ const Tools = () => {
 
     return (
         <Box m="50px">
-            <Box mb={2} display="flex" justifyContent="flex-end" gap={2}>
+            <Box mb={2} display="flex" justifyContent="flex-start" gap={2}>
                 <TextField
                     label="Buscar"
                     variant="outlined"
