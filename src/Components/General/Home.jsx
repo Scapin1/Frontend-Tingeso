@@ -29,7 +29,7 @@ const Home = () => {
                 gutterBottom
                 sx={{ color: colors.greenAccent[600] }}
             >
-                Sistema ToolRent · Panel Interno de Gestión
+                ToolRent · Panel Interno de Gestión
             </Typography>
 
             <Typography variant="body1" sx={{ color: colors.grey[100] }}>
