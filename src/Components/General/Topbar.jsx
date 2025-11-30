@@ -1,12 +1,12 @@
 import { Box, IconButton, useTheme } from "@mui/material";
-import {useContext, useEffect, useState} from "react";
-import {ColorModeContext, tokens} from "../../theme.js";
+import { useContext, useEffect, useState } from "react";
+import { ColorModeContext, tokens } from "../../theme.js";
 import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import LoginIcon from "@mui/icons-material/Login";
 import LogoutIcon from "@mui/icons-material/Logout";
 import keycloak from "../../services/keycloak.js";
-import {redirect} from "react-router-dom";
+import { redirect } from "react-router-dom";
 
 
 const Topbar = () => {
@@ -30,9 +30,9 @@ const Topbar = () => {
     const handleLogin = () => {
         keycloak.login();
     };
-p
+
     const handleLogout = () => {
-        keycloak.logout({redirectUri:"http://localhost/home" });
+        keycloak.logout({ redirectUri: "http://localhost/home" });
     };
 
     return (
