@@ -2,21 +2,21 @@ import React, { useEffect, useState } from "react";
 import { Grid, CircularProgress, Box, Button } from "@mui/material";
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import ToolLoansChart from "./ToolLoansChart";
-import MostRequestedToolCard from "./MostRequestedToolCard";
+import RankingMostRequestedTools from "./RankingMostRequestedTools";
 import TopClientsList from "./TopClientsList";
 import TopOverdueClientsList from "./TopOverdueClientsList";
 import kardexService from "../../Services/kardex.service.js";
 import Stack from '@mui/material/Stack';
-import ToolWithMostOverduesCard from "./ToolWithMostOverduesCard";
+import RankingMostOverdueTools from "./RankingMostOverdueTools";
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { TabContext, TabList, TabPanel} from '@mui/lab';
+import { TabContext, TabList, TabPanel } from '@mui/lab';
 import Tab from '@mui/material/Tab';
 import { useTheme } from '@mui/material/styles';
 import { tokens } from '../../theme.js';
-import MostRequestedToolInRangeCard from "./MostRequestedToolInRangeCard";
+import RankingMostRequestedToolsInRange from "./RankingMostRequestedToolsInRange";
 import RequestedToolsInRangeChart from "./RequestedToolsInRangeChart";
-import ToolWithMostOverduesInRangeCard from "./ToolWithMostOverduesInRangeCard";
+import RankingMostOverdueToolsInRange from "./RankingMostOverdueToolsInRange";
 import TopClientsInRangeList from "./TopClientsInRangeList";
 import TopOverdueClientsInRangeList from "./TopOverdueClientsInRangeList";
 
@@ -85,8 +85,8 @@ const ToolLoansDashboard = () => {
                         </Grid>
                         <Grid item xs={12} md={4}>
                             <Stack spacing={2}>
-                                <MostRequestedToolCard />
-                                <ToolWithMostOverduesCard />
+                                <RankingMostRequestedTools />
+                                <RankingMostOverdueTools />
                             </Stack>
                         </Grid>
                         <Grid item xs={12} md={4}>
@@ -127,8 +127,8 @@ const ToolLoansDashboard = () => {
                             </Grid>
                             <Grid item xs={12} md={4}>
                                 <Stack spacing={2}>
-                                    <MostRequestedToolInRangeCard dateFrom={dateFrom} dateTo={dateTo} />
-                                    <ToolWithMostOverduesInRangeCard dateFrom={dateFrom} dateTo={dateTo} />
+                                    <RankingMostRequestedToolsInRange dateFrom={dateFrom} dateTo={dateTo} />
+                                    <RankingMostOverdueToolsInRange dateFrom={dateFrom} dateTo={dateTo} />
                                 </Stack>
                             </Grid>
                             <Grid item xs={12} md={4}>

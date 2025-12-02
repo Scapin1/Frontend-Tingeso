@@ -6,16 +6,20 @@ import {
     Box,
     Avatar,
     useTheme,
-    CircularProgress
+    CircularProgress,
+    List,
+    ListItem,
+    ListItemAvatar,
+    ListItemText
 } from "@mui/material";
 import BuildIcon from "@mui/icons-material/Build";
 import { tokens } from "../../theme";
-import kardexService from "../../services/kardex.service";
+import kardexService from "../../Services/kardex.service";
 
-const MostRequestedToolInRangeCard = ({ dateFrom, dateTo }) => {
+const RankingMostRequestedToolsInRange = ({ dateFrom, dateTo }) => {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
-    const [toolInfo, setToolInfo] = useState(null);
+    const [tools, setTools] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
@@ -35,8 +39,11 @@ const MostRequestedToolInRangeCard = ({ dateFrom, dateTo }) => {
         setLoading(true);
         setError(null);
         kardexService.getMostRequestedToolInRange(startDate, endDate)
-            .then(res => setToolInfo(res.data))
-            .catch(() => setError("No se pudo obtener la herramienta más arrendada en el rango."))
+            .then(res => {
+                const data = Array.isArray(res.data) ? res.data : [res.data];
+                setTools(data);
+            })
+            .catch(() => setError("No se pudo obtener el ranking en el rango."))
             .finally(() => setLoading(false));
     }, [dateFrom, dateTo]);
 
@@ -63,16 +70,13 @@ const MostRequestedToolInRangeCard = ({ dateFrom, dateTo }) => {
                     alignItems: 'center'
                 }}
             >
-                <Avatar sx={{ bgcolor: colors.greenAccent[500], width: 50, height: 50, mb: 2 }}>
-                    <BuildIcon fontSize="large" />
-                </Avatar>
                 <Typography
                     variant="subtitle1"
                     color={colors.greenAccent[400]}
                     gutterBottom
                     fontWeight={700}
                 >
-                    Herramienta más Préstada
+                    Ranking: Más Prestadas
                 </Typography>
                 {(!dateFrom || !dateTo) ? (
                     <Typography variant="body2" color={theme.palette.text.secondary}>
@@ -84,15 +88,30 @@ const MostRequestedToolInRangeCard = ({ dateFrom, dateTo }) => {
                     <Typography variant="body2" color={theme.palette.text.secondary}>
                         {error}
                     </Typography>
-                ) : toolInfo && toolInfo.toolName ? (
-                    <Box textAlign="center">
-                        <Typography variant="h6" fontWeight={700} color={colors.blueAccent[200]}>
-                            {toolInfo.toolName}
-                        </Typography>
-                        <Typography variant="body2" color={colors.greenAccent[200]} fontWeight={500}>
-                            {toolInfo.requestCount} préstamos
-                        </Typography>
-                    </Box>
+                ) : tools && tools.length > 0 ? (
+                    <List sx={{ width: '100%' }}>
+                        {tools.slice(0, 5).map((tool, index) => (
+                            <ListItem key={index} disableGutters>
+                                <ListItemAvatar>
+                                    <Avatar sx={{ bgcolor: colors.greenAccent[500], width: 30, height: 30 }}>
+                                        <BuildIcon fontSize="small" />
+                                    </Avatar>
+                                </ListItemAvatar>
+                                <ListItemText
+                                    primary={
+                                        <Typography variant="body1" fontWeight={600} color={colors.blueAccent[200]}>
+                                            {tool.toolName}
+                                        </Typography>
+                                    }
+                                    secondary={
+                                        <Typography variant="body2" color={colors.greenAccent[200]} fontWeight={500}>
+                                            {tool.requestCount} préstamos
+                                        </Typography>
+                                    }
+                                />
+                            </ListItem>
+                        ))}
+                    </List>
                 ) : (
                     <Typography variant="body2" color={theme.palette.text.secondary}>
                         No hay datos de herramientas
@@ -103,4 +122,4 @@ const MostRequestedToolInRangeCard = ({ dateFrom, dateTo }) => {
     );
 };
 
-export default MostRequestedToolInRangeCard;
+export default RankingMostRequestedToolsInRange;

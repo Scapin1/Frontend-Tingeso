@@ -6,17 +6,20 @@ import {
     Box,
     Avatar,
     useTheme,
-    CircularProgress
+    CircularProgress,
+    List,
+    ListItem,
+    ListItemAvatar,
+    ListItemText
 } from "@mui/material";
 import ErrorIcon from '@mui/icons-material/Error';
-import BuildIcon from '@mui/icons-material/Build';
 import loanService from "../../services/loan.service";
 import { tokens } from "../../theme";
 
-const ToolWithMostOverduesInRangeCard = ({ dateFrom, dateTo }) => {
+const RankingMostOverdueToolsInRange = ({ dateFrom, dateTo }) => {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
-    const [tool, setTool] = useState(null);
+    const [tools, setTools] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
 
@@ -36,8 +39,11 @@ const ToolWithMostOverduesInRangeCard = ({ dateFrom, dateTo }) => {
         setLoading(true);
         setError("");
         loanService.getToolWithMostOverduesInRange(startDate, endDate)
-            .then(res => setTool(res.data))
-            .catch(() => setError("No se pudo cargar la información de herramienta con más atrasos."))
+            .then(res => {
+                const data = Array.isArray(res.data) ? res.data : [res.data];
+                setTools(data);
+            })
+            .catch(() => setError("No se pudo cargar la información de herramientas con más atrasos."))
             .finally(() => setLoading(false));
     }, [dateFrom, dateTo]);
 
@@ -64,16 +70,13 @@ const ToolWithMostOverduesInRangeCard = ({ dateFrom, dateTo }) => {
                     alignItems: 'center'
                 }}
             >
-                <Avatar sx={{ bgcolor: colors.redAccent[400], width: 50, height: 50, mb: 2 }}>
-                    <ErrorIcon fontSize="large" />
-                </Avatar>
                 <Typography
                     variant="subtitle1"
                     color={colors.redAccent[400]}
                     gutterBottom
                     fontWeight={700}
                 >
-                    Herramienta con más atrasos
+                    Ranking: Más Atrasos
                 </Typography>
                 {(!dateFrom || !dateTo) ? (
                     <Typography variant="body2" color={theme.palette.text.secondary}>
@@ -83,21 +86,36 @@ const ToolWithMostOverduesInRangeCard = ({ dateFrom, dateTo }) => {
                     <CircularProgress color="error" size={28} />
                 ) : error ? (
                     <Typography color={colors.redAccent[100]}>{error}</Typography>
-                ) : !tool || !tool.toolName ? (
+                ) : !tools || tools.length === 0 ? (
                     <Typography color={theme.palette.text.secondary}>No hay datos.</Typography>
                 ) : (
-                    <Box textAlign="center">
-                        <Box>
-                            <Typography variant="subtitle1" fontWeight={600}>{tool.toolName}</Typography>
-                            <Typography variant="body2" color={colors.redAccent[100]}>
-                                {tool.overdueCount} Atrasos
-                            </Typography>
-                        </Box>
-                    </Box>
+                    <List sx={{ width: '100%' }}>
+                        {tools.slice(0, 5).map((tool, index) => (
+                            <ListItem key={index} disableGutters>
+                                <ListItemAvatar>
+                                    <Avatar sx={{ bgcolor: colors.redAccent[400], width: 30, height: 30 }}>
+                                        <ErrorIcon fontSize="small" />
+                                    </Avatar>
+                                </ListItemAvatar>
+                                <ListItemText
+                                    primary={
+                                        <Typography variant="body1" fontWeight={600} color={colors.primary[100]}>
+                                            {tool.toolName}
+                                        </Typography>
+                                    }
+                                    secondary={
+                                        <Typography variant="body2" color={colors.redAccent[100]}>
+                                            {tool.overdueCount} Atrasos
+                                        </Typography>
+                                    }
+                                />
+                            </ListItem>
+                        ))}
+                    </List>
                 )}
             </CardContent>
         </Card>
     );
 };
 
-export default ToolWithMostOverduesInRangeCard;
+export default RankingMostOverdueToolsInRange;
