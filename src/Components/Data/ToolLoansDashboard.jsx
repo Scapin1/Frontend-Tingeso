@@ -87,15 +87,10 @@ const ToolLoansDashboard = () => {
                             <Stack spacing={2}>
                                 <RankingMostRequestedTools />
                                 <RankingMostOverdueTools />
+                                <TopClientsList />
+                                <TopOverdueClientsList />
                             </Stack>
                         </Grid>
-                        <Grid item xs={12} md={4}>
-                            <TopClientsList />
-                        </Grid>
-                        <Grid item xs={12} md={4}>
-                            <TopOverdueClientsList />
-                        </Grid>
-                        <Grid item xs={false} md={4} />
                     </Grid>
                 </TabPanel>
                 {/* FILTRABLE POR RANGO DE FECHAS */}
@@ -129,15 +124,10 @@ const ToolLoansDashboard = () => {
                                 <Stack spacing={2}>
                                     <RankingMostRequestedToolsInRange dateFrom={dateFrom} dateTo={dateTo} />
                                     <RankingMostOverdueToolsInRange dateFrom={dateFrom} dateTo={dateTo} />
+                                    <TopClientsInRangeList dateFrom={dateFrom} dateTo={dateTo} />
+                                    <TopOverdueClientsInRangeList dateFrom={dateFrom} dateTo={dateTo} />
                                 </Stack>
                             </Grid>
-                            <Grid item xs={12} md={4}>
-                                <TopClientsInRangeList dateFrom={dateFrom} dateTo={dateTo} />
-                            </Grid>
-                            <Grid item xs={12} md={4}>
-                                <TopOverdueClientsInRangeList dateFrom={dateFrom} dateTo={dateTo} />
-                            </Grid>
-                            <Grid item xs={false} md={4} />
                         </Grid>
                     </Box>
                 </TabPanel>

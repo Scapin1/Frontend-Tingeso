@@ -16,7 +16,6 @@ import Restricted from "./Components/General/Restricted.jsx";
 const Home = lazy(() => import('./Components/General/Home.jsx'));
 const Tools = lazy(() => import('./Components/Tools/Tools.jsx'));
 const ToolsAdd = lazy(() => import('./Components/Tools/ToolsAdd.jsx'));
-const Dragon = lazy(() => import('./Components/Other/Dragon.jsx'));
 const LoanTool = lazy(() => import('./Components/Loan/LoanTool.jsx'));
 const Clients = lazy(() => import('./Components/Clients/Clients.jsx'));
 const ClientsAdd = lazy(() => import('./Components/Clients/ClientsAdd.jsx'));
@@ -61,7 +60,6 @@ function App() {
                                 <Route path="/loanTool" element={<PrivateRoute element={<LocalizationProvider dateAdapter={AdapterDayjs}> <LoanTool /> </LocalizationProvider>} rolesAllowed={["ADMIN", "EMPLOYEE"]} />} />
                                 <Route path="/clients" element={<PrivateRoute element={<Clients />} rolesAllowed={["ADMIN", "EMPLOYEE"]} />} />
                                 <Route path="/clients/add" element={<PrivateRoute element={<ClientsAdd />} rolesAllowed={["ADMIN", "EMPLOYEE"]} />} />
-                                <Route path="/dragon" element={<PrivateRoute element={<Dragon />} rolesAllowed={["ADMIN"]} />} />
                                 <Route path="/loanTool" element={<PrivateRoute element={<LoanTool />} rolesAllowed={["ADMIN"]} />} />
                                 <Route path="/loans" element={<PrivateRoute element={<Loans />} rolesAllowed={["ADMIN", "EMPLOYEE"]} />} />
                                 <Route path="/kardex" element={<PrivateRoute element={<Kardex />} rolesAllowed={["ADMIN", "EMPLOYEE"]} />} />
