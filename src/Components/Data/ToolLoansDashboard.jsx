@@ -84,9 +84,11 @@ const ToolLoansDashboard = () => {
                             <ToolLoansChart rawData={rawData} />
                         </Grid>
                         <Grid item xs={12} md={4}>
-                            <Stack spacing={2}>
+                            <Stack spacing={2} direction="row">
                                 <RankingMostRequestedTools />
                                 <RankingMostOverdueTools />
+                            </Stack>
+                            <Stack spacing={2} direction="row">
                                 <TopClientsList />
                                 <TopOverdueClientsList />
                             </Stack>
@@ -121,9 +123,11 @@ const ToolLoansDashboard = () => {
                                 <RequestedToolsInRangeChart dateFrom={dateFrom} dateTo={dateTo} />
                             </Grid>
                             <Grid item xs={12} md={4}>
-                                <Stack spacing={2}>
+                                <Stack spacing={2} direction="row">
                                     <RankingMostRequestedToolsInRange dateFrom={dateFrom} dateTo={dateTo} />
                                     <RankingMostOverdueToolsInRange dateFrom={dateFrom} dateTo={dateTo} />
+                                </Stack>
+                                <Stack spacing={2} direction="row">
                                     <TopClientsInRangeList dateFrom={dateFrom} dateTo={dateTo} />
                                     <TopOverdueClientsInRangeList dateFrom={dateFrom} dateTo={dateTo} />
                                 </Stack>
