@@ -95,41 +95,39 @@ const ToolLoansDashboard = () => {
                 </TabPanel>
                 {/* FILTRABLE POR RANGO DE FECHAS */}
                 <TabPanel value="2">
-                    <Box mt={2} mb={2}>
-                        <Box display="flex" gap={2} alignItems="center" mb={2}>
-                            <DatePicker
-                                label="Desde"
-                                value={dateFrom}
-                                onChange={setDateFrom}
-                                slotProps={{ textField: { size: 'small', variant: 'outlined' } }}
-                            />
-                            <DatePicker
-                                label="Hasta"
-                                value={dateTo}
-                                onChange={setDateTo}
-                                slotProps={{ textField: { size: 'small', variant: 'outlined' } }}
-                            />
-                            <Button variant="contained" color="primary" onClick={handleFilter} disabled={!dateFrom || !dateTo || filteredLoading}>
-                                Filtrar
-                            </Button>
-                            <Button variant="outlined" color="secondary" onClick={() => { setDateFrom(null); setDateTo(null); }} disabled={!dateFrom && !dateTo}>
-                                Limpiar
-                            </Button>
-                        </Box>
-                        <Grid container spacing={3} sx={{ minHeight: '50vh' }}>
-                            <Grid item xs={12} md={8}>
-                                <RequestedToolsInRangeChart dateFrom={dateFrom} dateTo={dateTo} />
-                            </Grid>
-                            <Grid item xs={12} md={4}>
-                                <Stack spacing={2} direction="row">
-                                    <RankingMostRequestedToolsInRange dateFrom={dateFrom} dateTo={dateTo} />
-                                    <RankingMostOverdueToolsInRange dateFrom={dateFrom} dateTo={dateTo} />
-                                    <TopClientsInRangeList dateFrom={dateFrom} dateTo={dateTo} />
-                                    <TopOverdueClientsInRangeList dateFrom={dateFrom} dateTo={dateTo} />
-                                </Stack>
-                            </Grid>
-                        </Grid>
+                    <Box display="flex" gap={2} alignItems="center" mb={2}>
+                        <DatePicker
+                            label="Desde"
+                            value={dateFrom}
+                            onChange={setDateFrom}
+                            slotProps={{ textField: { size: 'small', variant: 'outlined' } }}
+                        />
+                        <DatePicker
+                            label="Hasta"
+                            value={dateTo}
+                            onChange={setDateTo}
+                            slotProps={{ textField: { size: 'small', variant: 'outlined' } }}
+                        />
+                        <Button variant="contained" color="primary" onClick={handleFilter} disabled={!dateFrom || !dateTo || filteredLoading}>
+                            Filtrar
+                        </Button>
+                        <Button variant="outlined" color="secondary" onClick={() => { setDateFrom(null); setDateTo(null); }} disabled={!dateFrom && !dateTo}>
+                            Limpiar
+                        </Button>
                     </Box>
+                    <Grid container spacing={3} sx={{ minHeight: '50vh' }}>
+                        <Grid item xs={12} md={8}>
+                            <RequestedToolsInRangeChart dateFrom={dateFrom} dateTo={dateTo} />
+                        </Grid>
+                        <Grid item xs={12} md={4}>
+                            <Stack spacing={2} direction="row">
+                                <RankingMostRequestedToolsInRange dateFrom={dateFrom} dateTo={dateTo} />
+                                <RankingMostOverdueToolsInRange dateFrom={dateFrom} dateTo={dateTo} />
+                                <TopClientsInRangeList dateFrom={dateFrom} dateTo={dateTo} />
+                                <TopOverdueClientsInRangeList dateFrom={dateFrom} dateTo={dateTo} />
+                            </Stack>
+                        </Grid>
+                    </Grid>
                 </TabPanel>
             </TabContext>
         </LocalizationProvider>
