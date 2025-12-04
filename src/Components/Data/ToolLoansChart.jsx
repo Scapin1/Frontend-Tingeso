@@ -18,7 +18,22 @@ const ToolLoansChart = ({ rawData }) => {
             grouped[month][tool] = item.count;
             toolsSet.add(tool);
         });
-        const monthsArr = Object.keys(grouped).sort((a, b) => a - b);
+
+        const monthOrder = {
+            "JANUARY": 1, "FEBRUARY": 2, "MARCH": 3, "APRIL": 4, "MAY": 5, "JUNE": 6,
+            "JULY": 7, "AUGUST": 8, "SEPTEMBER": 9, "OCTOBER": 10, "NOVEMBER": 11, "DECEMBER": 12,
+            "ENERO": 1, "FEBRERO": 2, "MARZO": 3, "ABRIL": 4, "MAYO": 5, "JUNIO": 6,
+            "JULIO": 7, "AGOSTO": 8, "SEPTIEMBRE": 9, "OCTUBRE": 10, "NOVIEMBRE": 11, "DICIEMBRE": 12
+        };
+
+        const getMonthNumber = (month) => {
+            if (typeof month === 'number') return month;
+            if (!isNaN(month)) return Number(month);
+            const upper = month.toUpperCase();
+            return monthOrder[upper] || 99;
+        };
+
+        const monthsArr = Object.keys(grouped).sort((a, b) => getMonthNumber(a) - getMonthNumber(b));
         const toolsArr = Array.from(toolsSet);
         const chartData = monthsArr.map(month => {
             const entry = { month };
@@ -43,7 +58,7 @@ const ToolLoansChart = ({ rawData }) => {
     }));
 
     return (
-        <Card sx={{background: colors.primary[600], display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        <Card sx={{ background: colors.primary[600], display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
             <CardContent sx={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
                 <Typography
                     variant="h4"
