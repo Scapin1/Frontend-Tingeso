@@ -6,7 +6,7 @@ import { visualizer } from "rollup-plugin-visualizer";
 export default defineConfig({
   plugins: [
     react(),
-    visualizer({
+    process.env.VISUALIZER && visualizer({
       open: true,
       gzipSize: true,
       brotliSize: true,
@@ -14,13 +14,5 @@ export default defineConfig({
   ],
   build: {
     target: 'es2020',
-    rollupOptions: {
-      output: {
-        manualChunks: {
-          vendor: ['react', 'react-dom', 'react-router-dom'],
-          mui: ['@mui/material', '@mui/icons-material', '@mui/x-data-grid', '@mui/x-date-pickers'],
-        },
-      },
-    },
   },
 })

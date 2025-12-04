@@ -7,8 +7,7 @@ import { useKeycloak } from "@react-keycloak/web";
 import SidebarMenu from "./Components/General/Sidebar.jsx";
 import { useState, Suspense, lazy } from "react";
 import Topbar from "./Components/General/Topbar.jsx";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+
 import Loading from "./Components/General/Loading.jsx";
 import Restricted from "./Components/General/Restricted.jsx";
 
@@ -57,7 +56,7 @@ function App() {
                                 <Route path="/home" element={<PrivateRoute element={<Home />} rolesAllowed={["ADMIN", "EMPLOYEE"]} />} />
                                 <Route path="/tools" element={<PrivateRoute element={<Tools />} rolesAllowed={["ADMIN", "EMPLOYEE"]} />} />
                                 <Route path="/tools/add" element={<PrivateRoute element={<ToolsAdd />} rolesAllowed={["ADMIN"]} />} />
-                                <Route path="/loanTool" element={<PrivateRoute element={<LocalizationProvider dateAdapter={AdapterDayjs}> <LoanTool /> </LocalizationProvider>} rolesAllowed={["ADMIN", "EMPLOYEE"]} />} />
+                                <Route path="/loanTool" element={<PrivateRoute element={<LoanTool />} rolesAllowed={["ADMIN", "EMPLOYEE"]} />} />
                                 <Route path="/clients" element={<PrivateRoute element={<Clients />} rolesAllowed={["ADMIN", "EMPLOYEE"]} />} />
                                 <Route path="/clients/add" element={<PrivateRoute element={<ClientsAdd />} rolesAllowed={["ADMIN", "EMPLOYEE"]} />} />
                                 <Route path="/loanTool" element={<PrivateRoute element={<LoanTool />} rolesAllowed={["ADMIN"]} />} />

@@ -2,10 +2,10 @@ import CustomTable from "../Other/CustomTable.jsx";
 import ToolStateChip from "./ToolStateChip.jsx";
 import DeactivateToolButton from "./DeactivateToolButton.jsx";
 import toolService from "../../services/tool.service.js";
-import React, {useState} from "react";
+import React, { useState } from "react";
 import ToolService from "../../services/tool.service.js";
 import EditIcon from "@mui/icons-material/Edit";
-import {IconButton, Tooltip, Box, Snackbar, Button} from "@mui/material";
+import { IconButton, Tooltip, Box, Snackbar, Button } from "@mui/material";
 import ToolChangeFeeDialog from "./ToolChangeFeeDialog.jsx";
 import keycloak from "../../services/keycloak.js";
 import ErrorSnackbar from "../General/ErrorSnackbar";
@@ -115,7 +115,7 @@ const IndividualToolsTable = ({ tools, onToolDeactivated }) => {
         },
     ];
 
-    return(
+    return (
         <Box>
             <ErrorSnackbar
                 message={error}
@@ -129,7 +129,7 @@ const IndividualToolsTable = ({ tools, onToolDeactivated }) => {
                 autoHideDuration={null}
             >
                 <MuiAlert elevation={6} severity="warning" sx={{ width: '100%' }} onClose={handleCancelDeactivate}>
-                    {`¿Está seguro que desea desactivar la herramienta con id: ${toolToDeactivate.id}?`}
+                    {`¿Está seguro que desea desactivar la herramienta con id: ${toolToDeactivate?.id}?`}
                     <Box mt={2} display="flex" justifyContent="flex-end">
                         <Button onClick={handleCancelDeactivate} color="inherit" style={{ marginRight: 8 }}>
                             Cancelar
