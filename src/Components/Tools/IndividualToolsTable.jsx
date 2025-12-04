@@ -129,7 +129,7 @@ const IndividualToolsTable = ({ tools, onToolDeactivated }) => {
                 autoHideDuration={null}
             >
                 <MuiAlert elevation={6} severity="warning" sx={{ width: '100%' }} onClose={handleCancelDeactivate}>
-                    {`¿Está seguro que desea desactivar la herramienta con id: ${toolToDeactivate?.id}?`}
+                    {`¿Está seguro que desea desactivar la herramienta con id: ${toolToDeactivate}?`}
                     <Box mt={2} display="flex" justifyContent="flex-end">
                         <Button onClick={handleCancelDeactivate} color="inherit" style={{ marginRight: 8 }}>
                             Cancelar
