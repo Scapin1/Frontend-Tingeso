@@ -35,59 +35,73 @@ const TopClientsList = () => {
                 color: theme.palette.text.primary,
                 borderRadius: 3,
                 boxShadow: 3,
-                minHeight: 180,
+                minHeight: 250,
                 display: 'flex',
                 flexDirection: 'column',
-                justifyContent: 'center',
-                alignItems: 'center',
+                height: '100%'
             }}
         >
-            <CardContent sx={{ width: '100%', p: 3 }}>
+            <CardContent
+                sx={{
+                    width: '100%',
+                    p: 3,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    flexGrow: 1
+                }}
+            >
                 <Typography
-                    variant="subtitle1"
+                    variant="h5"
                     sx={{
                         color: colors.greenAccent[400],
                         fontWeight: 700,
                         textAlign: 'center',
-                        mb: 1
+                        mb: 2
                     }}
                 >
                     Clientes con más pedidos
                 </Typography>
                 {loading ? (
-                    <Box display="flex" justifyContent="center" alignItems="center" minHeight={100}>
+                    <Box display="flex" justifyContent="center" alignItems="center" flexGrow={1}>
                         <CircularProgress color="inherit" size={32} />
                     </Box>
                 ) : clients && clients.length > 0 ? (
-                    <List>
+                    <List sx={{ width: '100%' }}>
                         {clients.map((client, idx) => (
-                            <ListItem key={client.id || idx}>
+                            <ListItem key={client.id || idx} disableGutters divider={idx !== clients.length - 1}>
                                 <ListItemAvatar>
-                                    <Avatar sx={{ bgcolor: colors.blueAccent[500] }}>
+                                    <Avatar sx={{ bgcolor: colors.blueAccent[500], width: 40, height: 40 }}>
                                         <PersonIcon />
                                     </Avatar>
                                 </ListItemAvatar>
-                                <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-                                    <Typography
-                                        variant="body1"
-                                        sx={{ fontWeight: 600, color: colors.blueAccent[200] }}
-                                    >
-                                        {client.clientRut}
-                                    </Typography>
-                                    <Typography
-                                        variant="body2"
-                                        sx={{ color: colors.greenAccent[200], fontWeight: 500 }}
-                                    >
-                                        {client.loanCount} pedidos
-                                    </Typography>
-                                </Box>
+                                <ListItemText
+                                    primary={
+                                        <Typography
+                                            variant="h6"
+                                            sx={{ fontWeight: 600, color: colors.grey[100] }}
+                                        >
+                                            {client.clientRut}
+                                        </Typography>
+                                    }
+                                    secondary={
+                                        <Typography
+                                            variant="body2"
+                                            sx={{ color: colors.greenAccent[400], fontWeight: 500 }}
+                                        >
+                                            {client.loanCount} pedidos
+                                        </Typography>
+                                    }
+                                />
                             </ListItem>
                         ))}
                     </List>
                 ) : (
-                    <Typography variant="body2" sx={{ color: theme.palette.text.secondary, textAlign: 'center' }}>
-                        No hay datos de clientes
-                    </Typography>
+                    <Box display="flex" justifyContent="center" alignItems="center" flexGrow={1}>
+                        <Typography variant="body1" sx={{ color: theme.palette.text.secondary, textAlign: 'center' }}>
+                            No hay datos de clientes
+                        </Typography>
+                    </Box>
                 )}
             </CardContent>
         </Card>

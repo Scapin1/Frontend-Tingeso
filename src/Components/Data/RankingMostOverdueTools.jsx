@@ -37,14 +37,13 @@ const RankingMostOverdueTools = ({ sx }) => {
         <Card
             sx={{
                 background: colors.primary[600],
-                color: colors.primary[300],
+                color: theme.palette.text.primary,
                 borderRadius: 3,
                 boxShadow: 3,
-                minHeight: 180,
+                minHeight: 250,
                 display: 'flex',
                 flexDirection: 'column',
-                justifyContent: 'center',
-                alignItems: 'center',
+                height: '100%',
                 ...sx
             }}
         >
@@ -54,35 +53,46 @@ const RankingMostOverdueTools = ({ sx }) => {
                     p: 3,
                     display: 'flex',
                     flexDirection: 'column',
-                    alignItems: 'center'
+                    alignItems: 'center',
+                    flexGrow: 1
                 }}
             >
                 <Typography
-                    variant="subtitle1"
+                    variant="h5"
                     color={colors.redAccent[400]}
                     gutterBottom
                     fontWeight={700}
+                    textAlign="center"
+                    sx={{ mb: 2 }}
                 >
                     Ranking: Más Atrasos
                 </Typography>
                 {loading ? (
-                    <CircularProgress color="error" size={28} />
+                    <Box display="flex" justifyContent="center" alignItems="center" flexGrow={1}>
+                        <CircularProgress color="error" size={32} />
+                    </Box>
                 ) : error ? (
-                    <Typography color={colors.redAccent[100]}>{error}</Typography>
+                    <Box display="flex" justifyContent="center" alignItems="center" flexGrow={1}>
+                        <Typography color={colors.redAccent[100]}>{error}</Typography>
+                    </Box>
                 ) : !tools || tools.length === 0 ? (
-                    <Typography color={colors.redAccent[100]}>No hay datos de atrasos.</Typography>
+                    <Box display="flex" justifyContent="center" alignItems="center" flexGrow={1}>
+                        <Typography variant="body1" color={colors.redAccent[100]}>
+                            No hay datos de atrasos.
+                        </Typography>
+                    </Box>
                 ) : (
                     <List sx={{ width: '100%' }}>
                         {tools.slice(0, 5).map((tool, index) => (
-                            <ListItem key={index} disableGutters>
+                            <ListItem key={index} disableGutters divider={index !== tools.length - 1}>
                                 <ListItemAvatar>
-                                    <Avatar sx={{ bgcolor: colors.redAccent[400], width: 30, height: 30 }}>
-                                        <ErrorIcon fontSize="small" />
+                                    <Avatar sx={{ bgcolor: colors.redAccent[400], width: 40, height: 40 }}>
+                                        <ErrorIcon />
                                     </Avatar>
                                 </ListItemAvatar>
                                 <ListItemText
                                     primary={
-                                        <Typography variant="body1" fontWeight={600} color={colors.primary[100]}>
+                                        <Typography variant="h6" fontWeight={600} color={colors.grey[100]}>
                                             {tool.toolName}
                                         </Typography>
                                     }

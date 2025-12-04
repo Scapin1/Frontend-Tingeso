@@ -51,58 +51,81 @@ const TopClientsInRangeList = ({ dateFrom, dateTo }) => {
                 color: theme.palette.text.primary,
                 borderRadius: 3,
                 boxShadow: 3,
-                minHeight: 180,
+                minHeight: 250,
                 display: 'flex',
                 flexDirection: 'column',
-                justifyContent: 'center',
-                alignItems: 'center',
+                height: '100%'
             }}
         >
-            <CardContent sx={{ width: '100%', p: 3 }}>
+            <CardContent
+                sx={{
+                    width: '100%',
+                    p: 3,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    flexGrow: 1
+                }}
+            >
                 <Typography
-                    variant="subtitle1"
+                    variant="h5"
                     sx={{
                         color: colors.greenAccent[400],
                         fontWeight: 700,
+                        textAlign: 'center',
                         mb: 2
                     }}
                 >
                     Clientes con más pedidos
                 </Typography>
                 {(!dateFrom || !dateTo) ? (
-                    <Typography variant="body2" color={theme.palette.text.secondary}>
-                        Seleccione un rango de fechas
-                    </Typography>
+                    <Box display="flex" justifyContent="center" alignItems="center" flexGrow={1}>
+                        <Typography variant="body1" color={theme.palette.text.secondary}>
+                            Seleccione un rango de fechas
+                        </Typography>
+                    </Box>
                 ) : loading ? (
-                    <CircularProgress color="inherit" size={28} />
+                    <Box display="flex" justifyContent="center" alignItems="center" flexGrow={1}>
+                        <CircularProgress color="inherit" size={32} />
+                    </Box>
                 ) : error ? (
-                    <Typography color={colors.redAccent[100]}>{error}</Typography>
+                    <Box display="flex" justifyContent="center" alignItems="center" flexGrow={1}>
+                        <Typography color={colors.redAccent[100]}>{error}</Typography>
+                    </Box>
                 ) : (
-                    <List dense>
+                    <List sx={{ width: '100%' }}>
                         {clients.length === 0 && (
-                            <Typography color={theme.palette.text.secondary}>No hay datos.</Typography>
+                            <Box display="flex" justifyContent="center" alignItems="center" flexGrow={1}>
+                                <Typography variant="body1" color={theme.palette.text.secondary}>
+                                    No hay datos.
+                                </Typography>
+                            </Box>
                         )}
                         {clients.map((client, idx) => (
-                            <ListItem key={client.id || idx}>
+                            <ListItem key={client.id || idx} disableGutters divider={idx !== clients.length - 1}>
                                 <ListItemAvatar>
-                                    <Avatar sx={{ bgcolor: colors.blueAccent[500] }}>
+                                    <Avatar sx={{ bgcolor: colors.blueAccent[500], width: 40, height: 40 }}>
                                         <PersonIcon />
                                     </Avatar>
                                 </ListItemAvatar>
-                                <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-                                    <Typography
-                                        variant="body1"
-                                        sx={{ fontWeight: 600, color: colors.blueAccent[200] }}
-                                    >
-                                        {client.clientRut}
-                                    </Typography>
-                                    <Typography
-                                        variant="body2"
-                                        sx={{ color: colors.greenAccent[200], fontWeight: 500 }}
-                                    >
-                                        {client.loanCount} pedidos
-                                    </Typography>
-                                </Box>
+                                <ListItemText
+                                    primary={
+                                        <Typography
+                                            variant="h6"
+                                            sx={{ fontWeight: 600, color: colors.grey[100] }}
+                                        >
+                                            {client.clientRut}
+                                        </Typography>
+                                    }
+                                    secondary={
+                                        <Typography
+                                            variant="body2"
+                                            sx={{ color: colors.greenAccent[400], fontWeight: 500 }}
+                                        >
+                                            {client.loanCount} pedidos
+                                        </Typography>
+                                    }
+                                />
                             </ListItem>
                         ))}
                     </List>

@@ -43,11 +43,10 @@ const RankingMostRequestedTools = () => {
                 color: theme.palette.text.primary,
                 borderRadius: 3,
                 boxShadow: 3,
-                minHeight: 140,
+                minHeight: 250,
                 display: 'flex',
                 flexDirection: 'column',
-                justifyContent: 'center',
-                alignItems: 'center',
+                height: '100%'
             }}
         >
             <CardContent
@@ -56,36 +55,41 @@ const RankingMostRequestedTools = () => {
                     p: 3,
                     display: 'flex',
                     flexDirection: 'column',
-                    alignItems: 'center'
+                    alignItems: 'center',
+                    flexGrow: 1
                 }}
             >
                 <Typography
-                    variant="subtitle1"
+                    variant="h5"
                     color={colors.greenAccent[400]}
                     gutterBottom
                     fontWeight={700}
+                    textAlign="center"
+                    sx={{ mb: 2 }}
                 >
                     Ranking: Más Prestadas
                 </Typography>
                 {loading ? (
-                    <CircularProgress color="inherit" size={32} sx={{ mt: 2 }} />
+                    <Box display="flex" justifyContent="center" alignItems="center" flexGrow={1}>
+                        <CircularProgress color="inherit" size={32} />
+                    </Box>
                 ) : tools && tools.length > 0 ? (
                     <List sx={{ width: '100%' }}>
                         {tools.slice(0, 5).map((tool, index) => (
-                            <ListItem key={index} disableGutters>
+                            <ListItem key={index} disableGutters divider={index !== tools.length - 1}>
                                 <ListItemAvatar>
-                                    <Avatar sx={{ bgcolor: colors.greenAccent[500], width: 30, height: 30 }}>
-                                        <BuildIcon fontSize="small" />
+                                    <Avatar sx={{ bgcolor: colors.greenAccent[500], width: 40, height: 40 }}>
+                                        <BuildIcon />
                                     </Avatar>
                                 </ListItemAvatar>
                                 <ListItemText
                                     primary={
-                                        <Typography variant="body1" fontWeight={600} color={colors.blueAccent[300]}>
+                                        <Typography variant="h6" fontWeight={600} color={colors.grey[100]}>
                                             {tool.toolName}
                                         </Typography>
                                     }
                                     secondary={
-                                        <Typography variant="body2" color={colors.greenAccent[100]}>
+                                        <Typography variant="body2" color={colors.greenAccent[400]}>
                                             {tool.requestCount} préstamos
                                         </Typography>
                                     }
@@ -94,9 +98,11 @@ const RankingMostRequestedTools = () => {
                         ))}
                     </List>
                 ) : (
-                    <Typography variant="body2" color={theme.palette.text.secondary}>
-                        No hay datos de herramientas
-                    </Typography>
+                    <Box display="flex" justifyContent="center" alignItems="center" flexGrow={1}>
+                        <Typography variant="body1" color={theme.palette.text.secondary}>
+                            No hay datos disponibles
+                        </Typography>
+                    </Box>
                 )}
             </CardContent>
         </Card>

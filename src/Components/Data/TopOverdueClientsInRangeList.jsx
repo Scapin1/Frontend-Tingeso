@@ -35,47 +35,79 @@ const TopOverdueClientsInRangeList = ({ dateFrom, dateTo }) => {
     }, [dateFrom, dateTo]);
 
     return (
-        <Card sx={{
-            background: colors.primary[600],
-            color: colors.grey[100],
-            borderRadius: 3,
-            boxShadow: 3,
-            minHeight: 180,
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
-            alignItems: 'center',
-        }}>
-            <CardContent sx={{ width: '100%', p: 3 }}>
-                <Box display="flex" alignItems="center" mb={2} p={1} borderRadius={2} sx={{ background: colors.redAccent[700], color: colors.redAccent[100] }}>
-                    <ErrorIcon sx={{ color: colors.redAccent[200], mr: 1 }} />
-                    <Typography variant="h6" color={colors.redAccent[100]}>
-                        Clientes con más atrasos
-                    </Typography>
-                </Box>
+        <Card
+            sx={{
+                background: colors.primary[600],
+                color: theme.palette.text.primary,
+                borderRadius: 3,
+                boxShadow: 3,
+                minHeight: 250,
+                display: 'flex',
+                flexDirection: 'column',
+                height: '100%'
+            }}
+        >
+            <CardContent
+                sx={{
+                    width: '100%',
+                    p: 3,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    flexGrow: 1
+                }}
+            >
+                <Typography
+                    variant="h5"
+                    color={colors.redAccent[400]}
+                    gutterBottom
+                    fontWeight={700}
+                    textAlign="center"
+                    sx={{ mb: 2 }}
+                >
+                    Clientes con más atrasos
+                </Typography>
                 {(!dateFrom || !dateTo) ? (
-                    <Typography variant="body2" color={colors.redAccent[100]}>
-                        Seleccione un rango de fechas
-                    </Typography>
+                    <Box display="flex" justifyContent="center" alignItems="center" flexGrow={1}>
+                        <Typography variant="body1" color={theme.palette.text.secondary}>
+                            Seleccione un rango de fechas
+                        </Typography>
+                    </Box>
                 ) : loading ? (
-                    <CircularProgress color="error" size={28} />
+                    <Box display="flex" justifyContent="center" alignItems="center" flexGrow={1}>
+                        <CircularProgress color="error" size={32} />
+                    </Box>
                 ) : error ? (
-                    <Typography color={colors.redAccent[100]}>{error}</Typography>
+                    <Box display="flex" justifyContent="center" alignItems="center" flexGrow={1}>
+                        <Typography color={colors.redAccent[100]}>{error}</Typography>
+                    </Box>
                 ) : (
-                    <List dense>
+                    <List sx={{ width: '100%' }}>
                         {clients.length === 0 && (
-                            <Typography color={colors.redAccent[100]}>No hay datos de atrasos.</Typography>
+                            <Box display="flex" justifyContent="center" alignItems="center" flexGrow={1}>
+                                <Typography variant="body1" color={colors.redAccent[100]}>
+                                    No hay datos de atrasos.
+                                </Typography>
+                            </Box>
                         )}
                         {clients.map((client, idx) => (
-                            <ListItem key={client.id || idx}>
+                            <ListItem key={client.id || idx} disableGutters divider={idx !== clients.length - 1}>
                                 <ListItemAvatar>
-                                    <Avatar sx={{ bgcolor: colors.redAccent[400] }}>
+                                    <Avatar sx={{ bgcolor: colors.redAccent[400], width: 40, height: 40 }}>
                                         <HighlightOffIcon />
                                     </Avatar>
                                 </ListItemAvatar>
                                 <ListItemText
-                                    primary={client.rut}
-                                    secondary={`Atrasos: ${client.overdueCount}`}
+                                    primary={
+                                        <Typography variant="h6" fontWeight={600} color={colors.grey[100]}>
+                                            {client.rut}
+                                        </Typography>
+                                    }
+                                    secondary={
+                                        <Typography variant="body2" color={colors.redAccent[100]}>
+                                            Atrasos: {client.overdueCount}
+                                        </Typography>
+                                    }
                                 />
                             </ListItem>
                         ))}
