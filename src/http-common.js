@@ -1,11 +1,10 @@
 import axios from "axios";
 import keycloak from "./services/keycloak.js";
 
-const API_HOST = import.meta.env.VITE_API_HOST || '192.168.1.86';
-const API_PORT = import.meta.env.VITE_API_PORT || '8080';
+const API_URL = import.meta.env.VITE_API_URL || `http://${import.meta.env.VITE_BACKEND_SERVER || 'localhost'}:${import.meta.env.VITE_BACKEND_PORT || '8090'}`;
 
     const api = axios.create({
-        baseURL: `http://${API_HOST}:${API_PORT}`,
+        baseURL: API_URL,
         headers: {
             'Content-Type': 'application/json'
         }
