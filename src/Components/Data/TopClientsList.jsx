@@ -14,7 +14,7 @@ import {
 } from "@mui/material";
 import PersonIcon from "@mui/icons-material/Person";
 import { tokens } from "../../theme";
-import loanService from "../../Services/loan.service.js";
+import loanService from "../../services/loan.service.js";
 
 const TopClientsList = () => {
     const theme = useTheme();

@@ -14,7 +14,7 @@ import {
 } from "@mui/material";
 import BuildIcon from "@mui/icons-material/Build";
 import { tokens } from "../../theme";
-import kardexService from "../../Services/kardex.service";
+import kardexService from "../../services/kardex.service";
 
 const RankingMostRequestedToolsInRange = ({ dateFrom, dateTo }) => {
     const theme = useTheme();
