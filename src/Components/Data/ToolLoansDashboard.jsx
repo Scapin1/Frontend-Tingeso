@@ -5,7 +5,7 @@ import ToolLoansChart from "./ToolLoansChart";
 import RankingMostRequestedTools from "./RankingMostRequestedTools";
 import TopClientsList from "./TopClientsList";
 import TopOverdueClientsList from "./TopOverdueClientsList";
-import kardexService from "../../Services/kardex.service.js";
+import kardexService from "../../services/kardex.service.js";
 import Stack from '@mui/material/Stack';
 import RankingMostOverdueTools from "./RankingMostOverdueTools";
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
