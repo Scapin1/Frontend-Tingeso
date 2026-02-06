@@ -32,7 +32,7 @@ const Topbar = () => {
     };
 
     const handleLogout = () => {
-        keycloak.logout({ redirectUri: "http://localhost/home" });
+        keycloak.logout({ redirectUri: "http://localhost:8081/home" });
     };
 
     return (
